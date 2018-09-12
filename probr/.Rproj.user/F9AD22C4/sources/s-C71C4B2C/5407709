@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536774279421.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5407709",
+    "lastKnownWriteTime" : 1536774308,
+    "last_content_update" : 1536781698182,
+    "path" : "~/Bios660/probr/prob.R",
+    "project_path" : "prob.R",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

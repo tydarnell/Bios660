@@ -1,0 +1,10 @@
+library(tidyverse)
+
+f <- function(x){
+  factorial(x)
+}
+p <- function(n,r){
+  choose(n,r)
+}
+
+
