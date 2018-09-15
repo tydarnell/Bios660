@@ -78,17 +78,20 @@ P\left(\bigcup_{i=1}^{4}E_i\right)=1-\frac{3}{7}+\frac{4}{42}-\frac{1}{105}&\\
 \text{P(no couples sit together)}=\frac{12}{35} =.3428571&
 \end{align*}
 \section*{Problem 6}
-\[\dfrac{\dfrac{n!}{(n-m)!}(N-1)^{n-m}}{N^n}
+There are $N^n$ equally likely arrangements. There are $\binom{n}{m}$ ways to select $m$ balls for the first compartment. This leaves $N-1$ compartments and $n-m$ balls giving us $(N-1)^{n-m}$ possible arrangements for the remaining balls. Putting this all together we have:
+\[\dfrac{\binom{n}{m}(N-1)^{n-m}}{N^n}
 \]
-\pagebreak
+\newpage
 \section*{Problem 7}
 \chead{Problems 7-9}
 \[\dfrac{{6\choose 3}{6\choose 3}}{{12\choose 6}}=.4329004
 \]
 \section*{Problem 8}
+There are $(N-r)$ empty parking spaces that could be on adjacent to one side of his car over $(N-1)$ total spaces (since we don't count his car). This then leaves $(N-r-1)$ empty parking spaces that could be adjacent to the other side of his car over $(N-2)$ total spaces. Putting this together we have:
 \[ \dfrac{(N-r)(N-r-1)}{(N-1)(N-2)}
 \]
 \section*{Problem 9}
+In order to find the conditional probability of the coin having a heads and tails side given that one side turned up heads, we will use Bayes Rule combined with the Law of Total Probability.
 \begin{align*}
 \text{3 coins: } &\left\{HH,TT,HT\right\}\\
 P(HT|H)&=\dfrac{P(H|HT)P(HT)}{P(H|HT)P(HT)+P(H|{HT}^c)P({HT}^c)}\\
