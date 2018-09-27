@@ -1,0 +1,156 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{float}
+\graphicspath{ {} }
+\usepackage{mathtools}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Ty Darnell}
+\lhead{Homework 5}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+\begin{document}
+\begin{flushleft}
+\chead{Problems 1-5}
+\section*{Problem 1}
+\begin{enumerate}[(a)]
+\item $P(\text{Doubles})=\dfrac{1}{6}*\dfrac{1}{6}*6=\dfrac{1}{6}$
+\item $P(D) = \text{Doubles}=\dfrac{1}{6}$ \quad $P(A)=\text{Sum of 4 or less}=\dfrac{6}{36}=\dfrac{1}{6}$\medbreak
+$P(D|A)=\dfrac{P(A|D)P(D)}{P(A)}$\medbreak
+$P(D|A)=\dfrac{(1/3)*(1/6)}{(1/6)}=\dfrac{1}{3}$
+\item $P(\text{at least one 6})=1-P(\text{no 6's})=1-\dfrac{5}{6}*\dfrac{5}{6}=1-\dfrac{25}{36}=\dfrac{11}{36}$
+\item $P(B)=\text{Different numbers}=1-P(\text{Doubles}) =\dfrac{5}{6}$ \quad $P(A)=\text{At least one six}=\dfrac{11}{36}$\medbreak
+$P(A|B)= \dfrac{P(B|A)*P(A)}{P(B)}=\dfrac{(10/11)*(11/36)}{(5/6)}=\dfrac{1}{3}$
+\end{enumerate}
+
+\section*{Problem 2}
+\begin{align*}
+P(W_1)&=\dfrac{m}{m+n}\\
+P(W_k)&=P(W_{k-1})P(W_k|W_{k-1})+P({W_{k-1}}^c)P(W_k|{W_{k-1}}^c)\\
+&=\dfrac{m}{m+n}\dfrac{m+1}{m+n+1}+\dfrac{n}{m+n}\dfrac{m}{m+n+1}\\
+&=\dfrac{m(m+1)+nm}{(m+n)(m+n+1)}\\
+&=\dfrac{m(m+n+1)}{(m+n)(m+n+1)}\\
+&=\dfrac{m}{m+n}\\
+&\text{Thus } P(W_1)=P(W_k)
+\end{align*}
+\pagebreak
+\section*{Problem 3}
+\begin{align*}
+\text{We want to show:}&\\
+P(A|B)=P(C|B)P(A|B\cap C)&+P(C^c|B)P(A|B \cap C^c)\\
+\text{Using the definition } &\text{of conditional probability:}\\
+P(C|B)&=\dfrac{P(C\cap B)}{P(B)}\\
+P(A|B\cap C)&=\dfrac{P(A\cap B\cap C)}{P(B\cap C)}\\
+P(C^c|B)&=\dfrac{P(C^c\cap B)}{P(B)}\\
+P(A|B\cap C^c)&=\dfrac{P(A\cap B\cap C^c)}{P(B\cap C^c)}\\
+\text{Putting this}&\text{ together we can write}\\
+P(C|B)P(A|B\cap C)&+P(C^c|B)P(A|B \cap C^c) \text{ as:}\\
+\dfrac{P(C\cap B)}{P(B)}\dfrac{P(A\cap B\cap C)}{P(B\cap C)}&+
+\dfrac{P(C^c\cap B)}{P(B)}\dfrac{P(A\cap B\cap C^c)}{P(B\cap C^c)}\\
+=\dfrac{P(A\cap B\cap C)}{P(B)}&+\dfrac{P(A\cap B\cap C^c)}{P(B)}\\
+=&\dfrac{P(A\cap B)}{P(B)}\\
+=&P(A|B)
+\end{align*}
+\section*{Problem 4}
+\begin{enumerate}[(a)]
+\item
+\begin{align*}
+\text{We want to prove: } &P(A\cap B^c)=P(A)P(B^c)\\
+\text{Given } P(A\cap B)&=P(A)+P(B)\\
+\text{We can write } &A \text{ as:}\\
+A=&(A\cap B)\cup (A\cap B^c)\\
+\text{Since the union is}&\text{ disjoint we can write:}\\
+P(A)&=P(A\cap B)+P(A\cap B^c)\\
+P(A)&=P(A)P(B)+P(A\cap B^c)\\
+P(A\cap B^c)&=P(A)-P(A)P(B)\\
+P(A\cap B^c)&=P(A)(1-P(B))\\
+P(A\cap B^c)&=P(A)P(B^c)\\
+\text{Therefore } A \text{ and } B^c & \text{ are independent}
+\end{align*}
+\item
+\begin{align*}
+\text{We want to prove: }& P(A^c\cap B^c)=P(A^c)P(B^c)\\
+\text{We can write } &B^c \text{ as:}\\
+B^c=&(B^c\cap A)\cup (B^c\cap A^c)\\
+\text{Since the union is}&\text{ disjoint we can write:}\\
+P(B^c)&=P(B^c\cap A)+P(B^c\cap A^c)\\
+\text{Using part a}&\text{ we can write:}\\
+P(B^c)&=P(A)P(B^c)+P(B^c\cap A^c)\\
+P(B^c\cap A^c)&=P(B^c)-P(A)P(B^c)\\
+P(B^c\cap A^c)&=P(B^c)(1-P(A))\\
+P(B^c\cap A^c)&=P(B^c)P(A^c)\\
+\text{Therefore } A^c \text{ and } B^c & \text{ are independent}
+\end{align*}
+\end{enumerate}
+\section*{Problem 5}
+\textbf{Game 1:} P(win)=P(tie)=(.4)(.5)\\
+P(loss)=(.6)\medbreak
+\textbf{Game 2:} P(win)=P(tie)=(.7)(.5)\\
+P(loss)=(.3)\medbreak
+\textbf{PMF:} $f(y)=P\left\{Y(\omega)=y\right\}$\\
+$P(0)=(.6)(.3)=.18$\\
+$P(1)=(.4)(.5)(.3)+(.6)(.7)(.5)=.27$\\
+$P(2)=(.4)(.5)(.7)(.5)+(.4)(.5)(.3)+(.6)(.7)(.5)=.34$\\
+$P(3)=(.4)(.5)(.7)(.5)(2)=.14$\\
+$P(4)=(.4)(.5)(.7)(.5)=.07$
+\pagebreak
+\section*{Problem 6}
+\chead{Problems 6-10}
+\begin{enumerate}[(a)]
+\item
+P(Harry Wins)= $\sum_{1}^{10}(.3)^n$\medbreak $=(.3)+(.3)^2+.(3)^3+(.3)^4+(.3)^5+.(3)^6+(.3)^7+(.3)^8+.(3)^9+(.3)^{10}$\\
+$\approx 0.4285689$ \medbreak
+
+There is a .3 probability Harry wins the first game plus the probability the first game is drawn times .3 probability he wins the second and so on all the way to 10 games.
+\item
+$P(1)=.4+.3$\\
+$P(2)=(.3)(.4)+(.3)(.3)$\\
+$P(3)=[\prod_{i=1}^{2}.3^i](.4+.3)$\\
+$P(4)=[\prod_{i=1}^{3}.3^i](.4+.3)$\\
+$P(5)=[\prod_{i=1}^{4}.3^i](.4+.3)$\\
+$P(6)=[\prod_{i=1}^{5}.3^i](.4+.3)$\\
+$P(7)=[\prod_{i=1}^{6}.3^i](.4+.3)$\\
+$P(8)=[\prod_{i=1}^{7}.3^i](.4+.3)$\\
+$P(9)=[\prod_{i=1}^{8}.3^i](.4+.3)$\\
+$P(10)=[\prod_{i=1}^{9}.3^i](.4+.3)+.3^{10}$\\
+\end{enumerate}
+\section*{Problem 7}
+$P(M)=P(W)=.5$\\
+$P(M\cap C)=.05$\\
+$P(W \cap C)=.0025$\\
+$P(C|M)=\dfrac{P(C\cap M)}{P(M)}=.05/.5=.1$\\
+$P(C|W)=\dfrac{P(C\cap W)}{P(W)}=.0025/.5=.005$\\
+$P(C)=P(M)P(C|M)+P(W)P(C|W)=(.5)(.1)+(.5)(.005)=.0525$\medbreak
+$P(M|C)=\dfrac{P(C|M)P(M)}{P(C)}=(.1)(.5)/(.0525)=.952381$
+\section*{Problem 8}
+\begin{enumerate}[(a)]
+\item	
+$P(H)=1/5$\\
+$P(H\geq 2)=1-[P(H=0)+P(H=1)]$\\
+$P(H=0)=(4/5)^{10}$\\
+$P(H=1)=(4/5)^9(1/5)(10)$\\
+$P(H\geq 2)=1-[(4/5)^{10}+(4/5)^9(1/5)(10)]\approx .6241904$
+\item
+$P(H \geq 1)=1-P(H=0)\approx .8926258$\medbreak
+$P(H\geq 2|H \geq 1)=\dfrac{P(H\geq 2 \cap H \geq 1)}{P(H\geq 1)}$\medbreak
+$=\dfrac{P(H\geq 2)}{P(H \geq 1)}\approx.6992744$
+\end{enumerate}
+\section*{Problem 9}
+
+
+
+\end{flushleft}
+\end{document}
