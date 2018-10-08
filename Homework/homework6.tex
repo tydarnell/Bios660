@@ -266,12 +266,21 @@ u(x)&=F_X(x)=\begin{cases}
 \item 
 \begin{align*}
 \int_{0}^{\infty}(1-F_X(x))\dx &=\int_{0}^{\infty}P(X>x)\dx\\
-\text{We can write } & P(X>x) \text{ as } \int_{x}^{\infty}f_X(y) \ dy \text{ then we have:}\\
+\text{Since }  P(X>x)&= \int_{x}^{\infty}f_X(y) \ dy\\
 \int_{0}^{\infty}P(X>x)\dx&=\int_{0}^{\infty}\int_{x}^{\infty}f_X(y) \ dy \dx\\
 &=\int_{0}^{\infty}\int_{0}^{y}\dx f_X(y) dy\\
 &=\int_{0}^{\infty}(y-0)f_X(y)dy\\
 &=\int_{0}^{\infty}yf_X(y)dy\\
 &=E[X]
+\end{align*}
+\item 
+\begin{align*}
+\text{Since } 1-F_X(k)&=\sum_{k+1}^{\infty}f_X(k)\\
+\text{Then }
+\sum_{k=0}^{\infty}(1-F_X(k))&=\sum_{k=0}^{\infty}\left[\sum_{k+1}^{\infty}f_X(k)\right]\\
+&=\bigg(f_x(1)+f_x(2)+\dots\bigg)+\bigg(f_x(2)+f_x(3)+\dots\bigg)+\bigg(\dots \bigg)\\
+&=0+1f_x(1)+2f_x(2)+3f_x(3)+\dots\\
+&=\sum_{k=0}^{\infty}kf_x(k)=E[X]
 \end{align*}
 \end{enumerate}
 \pagebreak
@@ -296,6 +305,51 @@ m&=0
 \end{align*}
 \end{enumerate}
 \section*{Problem 12}
-
+\begin{align*}
+\text{WTS: If X is a continuous random variable: }&  \min_{a}E|X-a|=E|X-m|\\
+\text{We know } E[g(X)]&=\int_{-\infty}^{\infty}g(x)f_X(x)dx\\
+E|X-a|&=\int_{-\infty}^{\infty}|x-a|f(x)dx\\
+&=\int_{-\infty}^{a}-(x-a)f(x)\dx +\int_{a}^{\infty}(x-a)f(x)\dx\\
+&\text{Setting the first derivative equal to 0 we have:}\\
+\dfrac{d}{da}E|X-a|&=\int_{-\infty}^{a}f(x)\dx-\int_{a}^{\infty}f(x)\dx=0\\
+\text{The solution is: } \int_{-\infty}^{a}f(x)\dx&=\int_{a}^{\infty}f(x)\dx=1/2\\
+&\text{Which means a=m is the median by definition}\\
+&\text{taking the second derivative we have: }\\
+&\dfrac{d}{da}\left[\int_{-\infty}^{a}f(x)\dx-\int_{a}^{\infty}f(x)\dx\right]\\
+&=\dfrac{d}{da}\left[\bigg|_{-\infty}^{a}F(X)-\bigg|_{a}^{\infty}F(X)\right]\\
+&=\dfrac{d}{da}\left[F(a)-F(-\infty)-F(\infty)+F(a)\right]\\
+&=2f(a)>0\\
+\text{Thus } E|X-m|& \text{ is a minimum by the second derivative test}\\
+\text{Therefore } &\min_{a}E|X-a|=E|X-m|
+\end{align*}
+\section*{Problem 13}
+\begin{enumerate}[(a)]
+\item
+The uniform distribution pdf $U(0,1)$ is symmetric about $a=1/2$\\
+Standard Normal pdf is symmetric about $a=0$\\
+The binomial distribution $Bin(10,.5)$ pdf is symmetric about $a=5$
+\item 
+\begin{align*}
+\text{Let } X &\sim f(x) \text{ be symmetric at point } a \\
+\text{That is } \forall \ \epsilon &>0, f(a+\epsilon)=f(a-\epsilon)\\
+\text{WTS } &\text{a is the median:}\\ \int_{-\infty}^{a}f(x)\dx&=\int_{a}^{\infty}f(x)\dx=1/2\\
+\textbf{Proof:}\text{ Let } \epsilon&=x-a \text{ Then:}\\
+\int_{a}^{\infty}f(x)\dx&=\int_{0}^{\infty}f(a+\epsilon) d\epsilon\\
+=\int_{0}^{\infty}f(a-\epsilon)d\epsilon&=\int_{-\infty}^{a}f(x)\dx\text{ (letting } x=a-\epsilon)\\
+\text{Thus } \int_{a}^{\infty}f(x)\dx&=\int_{-\infty}^{a}f(x)\dx\\
+\text{We know } \int_{-\infty}^{a}f(x)\dx+\int_{a}^{\infty}f(x)\dx&=\int_{-\infty}^{\infty}f(x)\dx=1\\
+\text{Therefore } \int_{-\infty}^{a}f(x)\dx&=\int_{a}^{\infty}f(x)\dx=1/2\\
+\text{Thus }a&=median
+\end{align*}
+\item 
+\begin{align*}
+\text{Given } X&\sim f(x) \text{ and symmetric and } E[X] \text{ exists}\\
+\text{Show } E[X]&=a\\
+E[X]-a&=E(X-a)\\
+&=\int_{-\infty}^{\infty}(x-a)f(x)\dx\\
+\text{From part b we know a}&\text{ is the median therefore:}\\
+&=\int_{-\infty}^{a}(x-a)f(x)\dx+\int_{a}^{\infty}(x-a)f(x)\dx
+\end{align*}
+\end{enumerate}
 \end{flushleft}
 \end{document}
