@@ -264,10 +264,19 @@ u(x)&=F_X(x)=\begin{cases}
 \end{cases}
 \end{align*}
 \section*{Problem 9}
-\begin{enumerate}[(a)]
-\item 
-
-\end{enumerate}
+Since part a and b are equivalent we will prove part b which means part a is true.
+\begin{align*}
+\text{Given: } &X \text{ is a discrete random variable with } cdf \ F_X(x) \text{ and } Y =F_X(X)\\
+\text{WTS: }& F_Y(y)\leq y \ \forall \ 0<y<1\\
+F_Y(y)&<y \text{ for some } 0<y<1\\
+\text{Proof: }&\\
+\text{Let } A_Y&=\{x:F_X(x)\leq y\}\\
+\text{Then } F_Y(y)&=P(Y\leq y)=P(F_X(x)\leq y)=P(x \in A_y)\\
+\text{Thus }\lim_{\uparrow x} F_X(x)&<\lim_{\downarrow x} F_X(x)\\
+\text{Therefore} P(x\in A_y)&=\lim_{\uparrow x}F_X(x)\\
+\text{Thus } &F_Y(y)\leq y \ \forall \ 0<y<1\\
+\text{and } F_Y(y)&<y \text{ for some } 0<y<1\\
+\end{align*}
 \section*{Problem 10}
 \begin{enumerate}[(a)]
 \item 
