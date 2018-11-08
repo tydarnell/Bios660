@@ -148,6 +148,25 @@ then we have $Y\sim normal(500/3,\sqrt{1250}/3)$\\
 $P(150 \leq Y\leq 200)=P(Y\leq 200)-P(Y\leq 150)$\\
 $=P(Z \leq (200+.5-500/3)/\sqrt{1250}/3)-P(Z \leq (150-.5-500/3)/\sqrt{1250}/3)$\\
 $=\Phi(2.87)-\Phi(-1.46)=\Phi(2.87)-1+\Phi(-1.46)=.9258$\\
+\section*{Problem 12}
+Let k by the number of years old the radio is\\
+$P(X>8+k|X>k)=P(X>8)$ \\
+by the memoryless property of the exponential distribution\medbreak
+$P(X>8)=\int_{8}^{\infty}(1/8)e^{-(1/8)x}\dx$\\
+$=\bigg|_{0}^{\infty}-e^{-(1/8)x}=e^{-1}$
+
+\section*{Problem 13}
+\begin{align*}
+M_X(t)&=E(e^{tx})=\int_{0}^{\infty}e^{tx}\lambda e^{-\lambda x} \dx\\
+&=\lambda\int_{0}^{\infty}e^{-(\lambda-t)x} \dx\\
+&=\dfrac{-\lambda}{\lambda-t}\bigg|_{0}^{\infty} \text{for } t<\lambda\\
+M_X(t)&=\dfrac{\lambda}{\lambda-t} \text{ for } t<\lambda\\
+M_X(t)&=\sum_{k=0}^{\infty}\dfrac{t^k}{k!}E(X^k)\\
+\text{Letting } E(X^k)&=\dfrac{k!}{\lambda^k} \text{ we have:}\\
+M_X(t)&=\sum_{k=0}^{\infty}\dfrac{t^k}{k!}\dfrac{k!}{\lambda^k}\\
+&=\sum_{k=0}^{\infty}\dfrac{t^k}{\lambda^k}=\dfrac{\lambda}{\lambda-t} \text{ by sum of infinite geometric series}\\
+\text{Thus } E(X^k)&=\dfrac{k!}{\lambda^k}
+\end{align*}
 \section*{Problem 14}
 \begin{align*}
 \text{WTS: If } X &\sim exp(\lambda), \ cX\sim exp(\lambda/c) \ c>0\\

@@ -7,16 +7,16 @@
     "folds" : "",
     "hash" : "2513367404",
     "id" : "5407709",
-    "lastKnownWriteTime" : 1536774308,
-    "last_content_update" : 1536774308,
+    "lastKnownWriteTime" : 1540815572,
+    "last_content_update" : 1540815572172,
     "path" : "~/Bios660/probr/prob.R",
     "project_path" : "prob.R",
     "properties" : {
-        "cursorPosition" : "10,0",
+        "cursorPosition" : "9,0",
         "scrollLine" : "0"
     },
     "relative_order" : 1,
-    "source_on_save" : false,
+    "source_on_save" : true,
     "source_window" : "",
     "type" : "r_source"
 }
