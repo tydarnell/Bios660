@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{float}
+\graphicspath{ {} }
+\usepackage{mathtools}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Ty Darnell}
+\lhead{Homework 11}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+\allowdisplaybreaks
+\begin{document}
+\begin{flushleft}
+\chead{Problems 1-3}
+\section*{Problem 1}
+\begin{align*}
+\text{From} &\text{ Example 4.3.1 and Theorem 4.3.2 we know:}\\
+X+Y &\sim \text{Poisson}(\theta+\lambda)\\
+\text{Let } U&=X+Y, \ V=Y\\
+\text{Then } X&=U-V, \ Y=V\\
+f(u,v)&=\dfrac{\theta^{u-v}e^{-\theta}}{(u-v)!}\dfrac{\lambda^{v} e^{-\lambda}}{v!} \ v=0,1,\dots \ u=v,v+1, \dots\\
+f(u)&=\dfrac{e^{-(\theta+\lambda)}}{u!}(\theta+\lambda)^u \ u=0,1,\dots\\
+\text{Finding } &Y|X+Y\\
+\text{Defining }& \text{U and V the same way:}\\
+f(y|x+y)&= f(v|u)\\
+f(v|u)&=\dfrac{f(u,v)}{f(u)}\\
+&=\dfrac{\dfrac{\theta^{u-v}e^{-\theta}}{(u-v)!}\dfrac{\lambda^v e^{-\lambda}}{v!}}{\dfrac{e^{-(\theta+\lambda)}}{u!}(\theta+\lambda)^u}\\
+&=\dfrac{u!}{(u-v)!v!}\dfrac{e^{-(\theta+\lambda)}}{e^{-(\theta+\lambda)}}\dfrac{\theta^{u-v}\lambda^v}{(\theta+\lambda)^u}\\
+&={u\choose v}\dfrac{\theta^{u-v}\lambda^v}{(\theta+\lambda)^u}\\
+&={u\choose v}\left(\dfrac{\lambda}{\theta+\lambda}\right)^{v}\left(\dfrac{\theta}{\theta+\lambda}\right)^{u-v}\\
+\text{Which is }& \text{binomial}\left(u,\dfrac{\lambda}{\theta+\lambda}\right)\\
+\text{Finding } &X|X+Y\\
+\text{Define } U&=X+Y, \ V=X\\
+\text{Then } X&=U-V, \ X=V\\
+f_{U,V}(u,v)&=f_{X,Y}(v,u-v)=\dfrac{\theta^v e^{-\theta}}{v!} \dfrac{\lambda^{u-v} e^{-\lambda}}{(u-v)!}\\
+f(u)&=\sum_{v=0}^{u}\dfrac{\theta^v e^{-\theta}}{v!}\dfrac{\lambda^{u-v}e^{-\lambda}}{(u-v)!}\\
+&=\dfrac{e^{-(\theta+\lambda)}}{u!}\sum_{v=0}^{u}{u \choose v}\theta^v \lambda^{u-v}\\
+\text{Using}&\text{ the binomial theorem we have:}\\
+f(u)&=\dfrac{e^{-(\theta+\lambda)}}{u!}(\theta+\lambda)^u\\
+f(x|x+y)&= f(v|u)\\
+&=\dfrac{f(u,v)}{f(u)}\\
+&=\dfrac{\dfrac{\theta^v e^{-\theta}}{v!} \dfrac{\lambda^{u-v} e^{-\lambda}}{(u-v)!}}{\dfrac{e^{-(\theta+\lambda)}}{u!}(\theta+\lambda)^u}\\
+&={u \choose v}\dfrac{\theta^v \lambda^{u-v}}{(\theta+\lambda)^u}\\
+&={u \choose v}\left(\dfrac{\theta}{\theta+\lambda}\right)^{v} \left(\dfrac{\lambda}{\theta+\lambda}\right)^{u-v}\\
+\text{Which is }& \text{binomial}\left(u,\dfrac{\theta}{\theta+\lambda}\right)\\
+\end{align*}
+\section*{Problem 2}
+$f_X(x)=p(1-p)^{x-1} \quad f_Y(y)=p(1-p)^{y-1}$\\
+Since X and Y are independent we have:\\
+$f_{X,Y}(x,y)=p(1-p)^{x-1}p(1-p)^{y-1}$\\
+$=p^2(1-p)^{x+y-2}$\\
+\begin{enumerate}[(a)]
+\item 
+Solving $V=X-Y$ for X we get $X=V+Y$\\ 
+If $V>0$ then $X>Y$\\
+Since $U=min(X,Y)$ this means that $U=Y$\\
+Thus we have $Y=U$ and $X=U+V$
+\begin{align*}
+f_{U,V}(u,v)&=P(Y=u,X=u+v)\\
+&=p^2(1-p)^{2u+v-2}\\
+\text{Which factors to: }& (p^2(1-p)^{2u})((1-p)^{v-2})\\
+\text{If } V&<0, \text{ then } X<Y\\
+\text{Thus } X=U, \quad Y=U-V\\
+f_{U,V}(u,v)&=P(X=u,Y=u-v)\\
+&=p^2(1-p)^{2u-v-2}\\
+\text{Which factors to: }& (p^2(1-p)^{2u})((1-p)^{-v-2})\\
+\text{If } V&=0 \text{ then } X=Y\\
+f_{U,V}(u,0)&=P(X=Y=u)=p^2(1-p)^{2u-2}\\
+\text{Which factors to: }& (p^2(1-p)^{2u})((1-p)^{-2})\\
+\text{Since we can factor}&\text{ all of these cases in terms of u and v, U and V are independent }
+\end{align*}
+\item 
+\begin{align*}
+\end{align*}
+\item
+\begin{align*}
+\text{Define } T&=X+Y\\
+f_{X,X+Y}(x,x+y)&=P(X=x,X+Y=t)=P(X=x,Y=t-x)=P(X=x)P(Y=t-x)\\
+&=p^2(1-p)^{x-1+t-x-1}=p^2(1-p)^{t-2}
+\end{align*}
+\end{enumerate}
+\section*{Problem 3}
+\begin{enumerate}[(a)]
+\item 
+\begin{align*}
+X_1,& X_2 \text{ are independent and distributed as:}\\
+f_{X_i}(x_i)&=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-x_i^2/2\sigma^2}\\
+Y_1&=X_1^2+X_2^2 \quad Y_2=\dfrac{X_1}{\sqrt{Y_1}}\\
+\end{align*}
+\end{enumerate}
+
+
+
+\end{flushleft}
+\end{document}
