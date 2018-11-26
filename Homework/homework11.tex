@@ -87,7 +87,15 @@ f_{U,V}(u,0)&=P(X=Y=u)=p^2(1-p)^{2u-2}\\
 \begin{align*}
 Z&=\dfrac{X}{(X+Y)}\\
 \text{Define } U&=X\\
-\text{Then } X&=U \quad Y=U/Z-U\\
+Z&=r/s \text{ where } r<s\\
+\dfrac{x}{x+y}&=r/s\\
+\text{Then } X&=r \ Y=s-r\\
+P(Z=r/s)&=\sum_{i=1}^{\infty}P(X=ir,Y=i(s-r))\\
+&=\sum_{i=1}^{\infty}p(1-p)^{ir-1}p(1-p)^{i(s-r)-1}\\
+&=\sum_{i=1}^{\infty}p^2(1-p)^{is-2}\\
+&=\left(\dfrac{p}{1-p}\right)^2\sum_{i=1}^{\infty}((1-p)^s)^i\\
+&=\left(\dfrac{p}{1-p}\right)^2 \dfrac{(1-p)^s}{1-(1-p)^s}\\
+&=\dfrac{p^2(1-p)^{s-2}}{1-(1-p)^s}
 \end{align*}
 \item
 \begin{align*}

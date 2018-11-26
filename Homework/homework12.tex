@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{float}
+\graphicspath{ {} }
+\usepackage{mathtools}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Ty Darnell}
+\lhead{Homework 12}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+\allowdisplaybreaks
+\begin{document}
+\begin{flushleft}
+\section*{Problem 1}
+WTS: For any r.v. X, if $g(x)$ is a convex function, then: $Eg(X)\geq g(EX)$\\
+Let $g(x)$ be a convex function\\
+Suppose $a+bx$ is a line tangent to $g(x)$ at $x=EX$\\
+and $g(x)>a+bx$ except at $x=EX$\\
+Then $Eg(X)>g(EX)$ unless $P(X=EX)=1$\\
+\section*{Problem 2}
+\begin{enumerate}[(a)]
+\item 
+\begin{align*}
+f_{XY}(x,y)&=\left(2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2} \right)^{-1}\\
+&*\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}\\
+f_X(x)&=\int_{-\infty}^{\infty}f_{XY}(x,y) \ dy\\
+\text{Let } z&=\dfrac{y-\mu_Y}{\sigma_Y} \quad dy=\sigma_Y dz \quad v=\dfrac{x-\mu_X}{\sigma_X}\\
+f_X(x)&=\int_{-\infty}^{\infty}\dfrac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[v^2-2\rho vz+z^2  \right] \right\}}\sigma_Y \ dz\\
+&=\dfrac{\exp{ \left(-\dfrac{v^2}{2(1-\rho^2)}\right)}}{2\pi \sigma_X \sqrt{1-\rho^2}}\int_{-\infty}^{\infty}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[-2\rho vz+z^2  \right] \right\}} \ dz\\
+&=\dfrac{\exp{ \left(-\dfrac{v^2}{2(1-\rho^2)}\right)}}{2\pi \sigma_X \sqrt{1-\rho^2}}\int_{-\infty}^{\infty}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[-2\rho vz+z^2+\rho^2v^2-\rho^2v^2  \right] \right\}} \ dz\\
+&=\dfrac{\exp{ \left(-\dfrac{v^2}{2(1-\rho^2)}\right)}}{2\pi \sigma_X \sqrt{1-\rho^2}}\int_{-\infty}^{\infty}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[(z-\rho v)^2-\rho^2 v^2 \right] \right\}} \ dz\\
+&=\dfrac{\exp{ \left(-\dfrac{v^2}{2(1-\rho^2)}\right)}\exp{ \left(\dfrac{-\rho^2 v^2}{2(1-\rho^2)}\right)}}{2\pi \sigma_X \sqrt{1-\rho^2}}\int_{-\infty}^{\infty}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}(z-\rho v)^2 \right\}} \ dz\\
+&=\dfrac{e^{-v^2/2}}{2\pi \sigma_X \sqrt{1-\rho^2}}\int_{-\infty}^{\infty}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}(z-\rho v)^2 \right\}} \ dz\\
+&\text{Since the integrand is the } N(\rho v,1-\rho^2) \text{ we have:}\\
+f_X(x)&=\dfrac{e^{-v^2/2}}{2\pi \sigma_X \sqrt{1-\rho^2}}\sqrt{2\pi}\sqrt{1-\rho^2}\\
+&=\dfrac{e^{-v^2/2}}{\sqrt{2\pi} \sigma_X }\\
+f_X(x)&=\dfrac{1}{\sqrt{2\pi}\sigma_X}\exp{\left(-\dfrac{(x-\mu_X)^2}{2\sigma_X^2}\right)}\\
+&\text{Which is the } N(\mu_X,\sigma^2_X) \text{ pdf}
+\end{align*}
+\item 
+\begin{multline*}
+\text{WTS: } f(Y|X)(y|x)=\dfrac{1}{\sqrt{2\pi}\sqrt{1-\rho^2}\sigma_Y}e^{\dfrac{-[y-\mu_Y-(\rho\sigma_Y /\sigma_X)(x-\mu_X)]^2}{2\sigma^2_Y(1-\rho^2)}}\\
+f(Y|X)(y|x)=\dfrac{f_{XY}(x,y)}{f_X(x)}\\
+=\dfrac{\dfrac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+	\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}}{\dfrac{1}{\sqrt{2\pi}\sigma_X}\exp{\left(-\dfrac{(x-\mu_X)^2}{2\sigma_X^2}\right)}}\\
+=\dfrac{\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}\exp{\left(-\dfrac{(x-\mu_X)^2}{2\sigma_X^2}\right)}}\\
+=\dfrac{1}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}}e^{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right]+\dfrac{(x-\mu_X)^2}{2\sigma_X^2} \right\}}\\
+=\dfrac{1}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}}e^{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2-(1-p^2)\dfrac{(x-\mu_X)^2}{\sigma_X^2}- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}\\
+=\dfrac{1}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}}e^{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\rho^2\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}\\
+=\dfrac{1}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}}e^{\left\{-\dfrac{1}{2(1-\rho^2)}\left[ \left(\dfrac{y-\mu_Y}{\sigma_Y} \right)-\rho\left(\dfrac{x-\mu_X}{\sigma_X} \right) \right]^2 \right\}}\\
+=\dfrac{1}{\sqrt{2\pi}\sigma_Y \sqrt{1-\rho^2}}e^{\left\{-\dfrac{1}{2\sigma^2_Y(1-\rho^2)}\left[y-\mu_Y-(\rho\sigma_Y /\sigma_X)(x-\mu_X) \right]^2 \right\}}\\
+\text{Which is the pdf of } N[\mu_Y+\rho(\sigma_Y/\sigma_X)(x-\mu_X),\sigma^2_Y(1-\rho^2)]
+\end{multline*}
+\item 
+\begin{multline*}
+\end{multline*}
+\end{enumerate}
+
+
+
+\end{flushleft}
+\end{document}

@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{float}
+\graphicspath{ {} }
+\usepackage{mathtools}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Ty Darnell}
+\lhead{Final Notes}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+\allowdisplaybreaks
+\begin{document}
+\begin{flushleft}
+\chead{Notes 14}
+\section*{Notes 14}
+\subsection*{Sum of Two Independent Poissons}
+$X\sim Pois(\lambda_1), \ Y\sim Pois(\lambda_2)$\\
+$U=X+Y \ V=Y$\\
+$X=U-V \ Y=V$\\
+Joint PMF of U and V is:\\
+$f_{U,V}(u,v)=f_{X,Y}(u-v,v)=\dfrac{e^{-\lambda_1}\lambda_1^{u-v}}{(u-v)!}\dfrac{e^{-\lambda_2}\lambda_2^v}{v!}$\\
+The distribution of $U=X+Y$ is the marginal:\\
+$f_U(u)=\sum_{v=0}^{u}\dfrac{e^{-\lambda_1}\lambda_1^{u-v}}{(u-v)!}\dfrac{e^{-\lambda_2}\lambda_2^v}{v!}$\\
+$=\dfrac{e^{-(\lambda_1+\lambda_2)}}{u!}\sum_{v=0}^{u} {u \choose v}\lambda_1^{u-v}\lambda_2^v$\medbreak
+Because of the binomial theorem\medbreak
+$=\dfrac{e^{-(\lambda_1+\lambda_2)}}{u!}(\lambda_1+\lambda_2)^u$\medbreak
+$U\sim Pois(\lambda_1+\lambda_2)$
+\subsection*{Jacobian}
+$J(u,v)$ is the Jacobian of the transformation $(x,y)\to (u,v)$ given by:\medbreak
+$J(u,v)=\dfrac{\partial(x,y)}{\partial(u,v)}=
+\begin{bmatrix}
+\dfrac{\partial x}{\partial u}& \dfrac{\partial x}{\partial v}\\
+\dfrac{\partial y}{\partial u}& \dfrac{\partial y}{\partial v}\\
+\end{bmatrix}$
+\subsection*{Functions of Independent Random Variables}
+Let X and Y be independent r.v.s\\
+Let $g:\mathbb{R}\to \mathbb{R}$ and $h:\mathbb{R}\to \mathbb{R}$ be functions\\
+Then the r.v.s $U=g(X)$ and $V=h(Y)$ are independent
+\subsection*{Ratio of Two Independent Normals}
+Let $X \sim N(0,1)$ and $Y\sim N(0,1)$\\
+The ratio $X/Y$ has the Cauchy distribution\\
+Let $U=X/Y$ and $V=Y$ \quad Then $X=UV$ and $Y=V$ \quad $J(u,v)=v$\\
+$f_{X,Y}(x,y)=\dfrac{1}{\sqrt{2\pi}}e^{-x^2/2}\dfrac{1}{\sqrt{2\pi}}e^{-y^2/2}=\dfrac{1}{2\pi}e^{-(x^2+y^2)/2}$\\
+$f_{U,V}(uv,v)=\dfrac{1}{2\pi}e^{-[(uv)^2+v^2]/2}*|v|=\dfrac{|v|}{2\pi}e^{-(u^2+1)v^2/2}$\\
+$f_{U}(u)=\int_{-\infty}^{\infty}f_{UV}(u,v) \ dv=2\int_{0}^{\infty}\dfrac{v}{2\pi}e^{-(u^2+1)v^2/2} \ dv$\\
+$=\dfrac{1}{\pi}\int_{0}^{\infty}e^{-(u^2+1)z} \ dz=\dfrac{1}{\pi(u^2+1)}$
+\subsection*{Sum of Two Independent Random Variables}
+Suppose X and Y are independent, find distribution of $Z=X+Y$\\
+In general: $F_Z(z)=P(X+Y\leq z)=P(\{(x,y) \text{ such that } x+y\leq z\})$\\
+Approaches:
+\begin{itemize}
+\item Bivariate transformation method (continuous and discrete)\\
+\item Discrete convolution:\\
+$f_Z(z)=\sum_{x+y=z}f_X(x)f_Y(y)=\sum_{x}f_X(x)f_Y(z-x)$\\
+\item Continuous convolution\\
+\item Mgf/cf method (continuous and discrete)\\
+$\phi_Z{\theta}=\phi_X(\theta)\phi_Y(\theta)$\\
+$Z=X-Y \quad \phi_Z{\theta}=\phi_X(\theta)\phi_Y(-\theta)$
+\end{itemize}
+\section*{Notes 15}
+\chead{Notes 15}
+\subsection*{Conditional Expectation and Variance}
+\textbf{Iterative Expectation Formula}\\
+$EX=E(E(X|Y))$\\
+\textbf{Variance}\\
+$Var[g(Y)]=E[g(y)-E(g(Y))]^2$\medbreak
+$VarX=E(Var(X|Y))+Var(E(X|Y))$\\
+$Var(g(Y)|X)=E\{[g(Y)-E(g(Y)|X)]^2|X\}$\\
+where both expectations are taken with respect to $f_{Y||X}(y)$\\
+\begin{itemize}
+\item $E(Var(X|Y))=E\{[X-E(X|Y)]^2\}$\\
+\item $Var(E(X|Y))=E\{[E(X|Y)-EX]^2\}$\\
+\end{itemize}
+\subsection*{Covariance and Correlation}
+$Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=\sigma_{XY}$\\
+Correlation =$\rho_{XY}=\dfrac{Cov(X,Y)}{\sqrt{VarX \ VarY}}=\dfrac{\sigma_{XY}}{\sigma_X \sigma_Y}$\\
+$=E\left[ \left( \dfrac{X-\mu_X}{\sigma_X} \right) \left( \dfrac{Y-\mu_Y}{\sigma_Y} \right) \right]$\medbreak
+X and Y are uncorrelated iff:\\
+$Cov(X,Y)=0$ or equivalently $\rho_{XY}=0$\\
+$Cov(X,Y)=E(XY)-E(X)E(Y)$\\
+If X and Y are independent and $Cov(X,Y)$ exists, then $Cov(X,Y)=0$\\
+If X and Y are uncorrelated this does not imply independence.\\
+\subsection*{Linear Combinations}
+$Cov(aX+B_Y,Z)=aCov(X,Z)+bCov(Y,Z)$\medbreak
+$Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y)$\medbreak
+$Corr(aX+b,cY+d)=\dfrac{ac}{|ac|}Corr(X,Y)$
+
+\subsection*{Standard Bivariate Normal}
+$f_{XY}(x,y)=\dfrac{1}{2\pi\sqrt{1-\rho^2}}\exp{\left[\dfrac{x^2-2\rho xy+y^2}{2(1-\rho^2)}\right]}$\\
+Both X and Y have marginal distributions are $N(0,1)$\\
+Correlation of X and Y is $\rho$\\
+Conditional Distribution are normal:\\
+$Y|X \sim N(\rho X,1-\rho^2) \quad X|Y \sim N(\rho Y, 1-\rho^2)$\\
+The means are the regression lines of Y on X and X on Y respectively.
+\subsection*{Bivariate Normal}
+Let $\tilde{X}$ and $\tilde{Y}$ have a standard bivariate normal distribution with correlation $\rho$\\
+Let $X=\mu_X+\sigma_X\tilde{X} \quad Y=\mu_Y+\sigma_Y\tilde{Y}$\\
+Then $(X,Y)$ has the bivariate normal density:\\
+$f_{XY}(x,y)=\left(2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2} \right)^{-1}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}$\medbreak
+Marginal distributions: $N(\mu_X,\sigma^2_X) \quad N(\mu_Y,\sigma^2_Y)$\\
+$Corr(X,Y)=\rho$\medbreak
+Conditional distributions are normal:\\
+$Y|X \sim N[\mu_Y+\rho(\sigma_Y/\sigma_X)(x-\mu_X),\sigma^2_Y(1-\rho^2)]$\medbreak
+Distribution of $aX+bY$ is:\\
+$N(a\mu_X+b\mu_Y,a^2\sigma^2_X+b^2\sigma^2_Y+2ab\rho \sigma_X \sigma_Y)$
+\subsection*{Multivariate Distributions}
+$\boldsymbol{X}=(X_1,X_2,\dots, X_n)$\\
+If $\boldsymbol{X}$ is discrete then:\\
+$P(\boldsymbol{X} \in A)=\sum_{\boldsymbol{X} \in A} f(\boldsymbol{X})$\\
+where $f(\boldsymbol{X})$ is the joint pmf\\
+If $\boldsymbol{X}$ is continuous then:\\
+$P(\boldsymbol{X}\in A)=\int \cdots \int_{A}f(x_1,\dots,x_n)dx_1,\dots dx_n$\medbreak
+\subsection*{Marginals and Conditionals}
+The \textbf{marginal} pdf or pmf of any subset of coordinates is found by integrating or summing the joint pdf or pmf over all possible values of the other coordinates.\medbreak
+
+The \textbf{conditional} pdf or pmf of a subset of coordinates given the values of the remaining coordinates is found by dividing the full joint pdf or pmf by the joint pdf or pmf of the remaining variables.
+
+\subsection*{Multivariate Independence}
+Independent Random Vectors:\\
+Let $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ be random vectors with joint pdf or pmf $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$\\
+Let $f\boldsymbol{X_j}(\boldsymbol{x_j})$ be the marginal pdf or pmf of $\boldsymbol{X_j}$.\\
+Then $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ are \textbf{mutually independent} random vectors if:\\
+$\forall$ $(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$: \quad  $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})=\prod_{j=1}^{n}f\boldsymbol{X_j}(\boldsymbol{x_j})$
+
+\end{flushleft}
+\end{document}
