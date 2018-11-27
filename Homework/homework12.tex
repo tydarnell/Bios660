@@ -28,8 +28,10 @@
 \section*{Problem 1}
 WTS: For any r.v. X, if $g(x)$ is a convex function, then: $Eg(X)\geq g(EX)$\\
 Let $g(x)$ be a convex function\\
-Suppose $a+bx$ is a line tangent to $g(x)$ at $x=EX$\\
-and $g(x)>a+bx$ except at $x=EX$\\
+Suppose $l(x)=a+bx$ is a line tangent to $g(x)$ at $x=EX$\\
+Since g is convex, it lies above the line $l(x)$\\
+Which means $g(x)>l(x) \ \forall x$ except at $x=EX$\\
+Thus $E(g(x))\geq E(l(x))=E(a+bX)=a+bE(X)=l(E(X))=g(E(X))$\\
 Then $Eg(X)>g(EX)$ unless $P(X=EX)=1$\\
 \section*{Problem 2}
 \begin{enumerate}[(a)]
@@ -67,10 +69,111 @@ f(Y|X)(y|x)=\dfrac{f_{XY}(x,y)}{f_X(x)}\\
 \end{multline*}
 \item 
 \begin{multline*}
+E(a_X+b_Y)=aEX+bEY=a\mu_X+b\mu_Y\\
+Var(a_X+b_Y)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y)\\
+=a^2\sigma_X^2+b^2\sigma^2_Y+2ab\rho\sigma_X\sigma_Y\\
+\text{Starting with the standard bivariate normal pdf we have :}\\
+f_{XY}(x,y)=\dfrac{1}{2\pi\sqrt{1-\rho^2}}\exp{\left[\dfrac{x^2-2\rho xy+y^2}{2(1-\rho^2)}\right]}\\
+\text{Let } U=aX+bY \quad V=Y\\
+\text{Then } X=(1/a)(U-bV) \quad Y=V\\
+J=\begin{bmatrix}
+1/a & -b/a \\
+0 & 1
+\end{bmatrix}=1/a\\
+f_{UV}(u,v)=\dfrac{1}{2a\pi\sqrt{1-\rho^2}}\exp{\left[-\dfrac{[(1/a)(u-bv)]^2-2\rho (1/a)(u-bv)v+v^2}{2(1-\rho^2)}\right]}\\
+=\dfrac{1}{2a\pi\sqrt{1-\rho^2}}e^{-\dfrac{1}{2(1-\rho^2)}\left[\dfrac{u^2-2bvu+b^2v^2-2\rho auv+2\rho abv^2+a^2v^2}{a^2}\right]}\\
+=\dfrac{1}{2a\pi\sqrt{1-\rho^2}}e^{-\dfrac{1}{2(1-\rho^2)}\left[\dfrac{u^2-2uv(b+\rho a)+v^2(b^2+2\rho ab+a^2)}{a^2}\right]}\\
+=\dfrac{1}{2a\pi\sqrt{1-\rho^2}}e^{-\dfrac{1}{2(1-\rho^2)}\left[\dfrac{b^2+2\rho ab+a^2}{a^2}\left[\dfrac{u^2}{b^2+2\rho ab+a^2}-2uv\dfrac{(b+\rho a)}{b^2+2\rho ab+a^2}+v^2\right] \right]}\\
+\text{Which is the joint bivariate normal pdf since:}\\
+\mu_U=\mu_V=0 \quad \sigma_u^2=b^2+2\rho ab+a^2, \sigma^2_V=1\\
+\rho_{UV}=\dfrac{Cov(U,V)}{\sigma_U\sigma_V}=E((U-\mu_u)(V-\mu_v))=E(UV)=E(aXY+bY^2)\\
+Cov(U,V)=E((U-\mu_u)(V-\mu_v))=E(UV)=E(aXY+bY^2)=a\rho+b\\
+\rho_{UV}=\dfrac{a\rho+b}{\sqrt{a^2+b^2+2ab\rho}}\\
+1-\rho_{UV}^2=1-\left(\dfrac{a\rho+b}{\sqrt{a^2+b^2+2ab\rho}}\right)^2\\
+=1-\dfrac{a^2\rho^2+b^2+2ab\rho}{a^2+b^2+2ab\rho}\\
+=\dfrac{(1-p^2)a^2}{a^2+b^2+2ab\rho}=\dfrac{(1-p^2)a^2}{\sigma^2_U}\\
+\text{define } \rho_{UV}=\rho^*\\
+\text{Then } a\sqrt{1-\rho^2}=\sigma_U\sqrt{1-p^{*2}}\\
+\text{Remembering } \sigma_V^2=1 \text{ we have:}\\
+f_{UV}(u,v)=\dfrac{1}{2\sigma_U \sigma_V\pi\sqrt{1-\rho^{*2}}}e^{-\dfrac{1}{2(1-p^{*2})}\left[\dfrac{u^2}{\sigma_U^2}-2\rho^{*}\dfrac{uv}{\sigma_U\sigma_V}+\dfrac{v^2}{\sigma_V^2} \right]}\\
+\text{Which is the bivarate normal pdf}\\
+\text{From part a we know  that the marginal distribution of U is } N(\mu_u,\sigma^2_u)\\
+\text{Which means that the distribution of aX+bY} \text{ is } N(a\mu_x+b\mu_Y,a^2\sigma^2_X+b^2\sigma^2_Y+2ab\rho\sigma_X\sigma_Y)\\
+\text{Based on the mean and variance we calculated at the beginning of the problem}\\
 \end{multline*}
 \end{enumerate}
+\section*{Problem 3}
+\begin{enumerate}[(a)]
+\item
+\begin{multline*}
+\psi_{X,Y}(t,u)=e^{2t+3u+t^2+atu+2u^2}\\
+\text{Let } J=X+2Y \quad K=2X-Y\\
+M_{J,K}(l,m)=E(e^{lJ+mK})=E(e^{l(X+2Y)+m(2X-Y)})\\
+=E(e^{lX+2lY+2mX-mY})\\
+=E(e^{(l+2m)X+(2l-m)Y})\\
+=M_{X,Y}(l+2m,2l-m)\\
+=e^{2l+4m+8l-3m+(l+2m)^2+a(l+2m)(2l-m)+2(2l-m)^2}\\
+=e^{8l+m+l^2+4ml+4m^2+8l^2+2m^2-8lm+2al^2+3alm-2am^2}\\
+=e^{8l+m+9l^2+6m^2-4ml+2al^2+3alm-2am^2}\\
+M_{X+2Y}(l,0)=e^{8l+9l^2+2al^2}\\
+M_{2X-Y}(0,m)=e^{m+6m^2-2am^2}\\
+M_{X+2Y}(l)M_{2X-Y}(m)=e^{8l+9l^2+2al^2}e^{m+6m^2-2am^2}\\
+=e^{8l+9l^2+2al^2+m+6m^2-2am^2}\\
+\text{If independent: } M_{X+2Y,2X-Y}(l,m)=M_{X+2Y}(l)M_{2X-Y}(m)\\
+e^{8l+9l^2+2al^2+m+6m^2-2am^2}=e^{8l+m+9l^2+6m^2-4ml+2al^2+3alm-2am^2}\\
+0=3alm-4ml\\
+0=(3a-4)ml \quad 3a-4=0\\
+a=4/3\\
+\end{multline*}
+\item 
+\begin{multline*}
+\text{Let } Z=(2X-Y)-(X+2Y)\\
+P(X+2Y<2X-Y)=P(Z>0)=P(X-3Y>0)\\
+M_Z(\theta)=M_{X-3Y}(\theta)=M_{X,Y}(\theta,-3\theta)\\
+=e^{2\theta-9\theta+\theta^2+(4/3)(-3\theta^2)+18\theta^2}\\
+=e^{-7\theta+15\theta^2}\\
+\text{This is in the form of the mgf of the normal distribution}\\
+e^{\mu t+(1/2)\sigma^2t^2}\\
+\text{Plugging in } \mu=-7 \quad \sigma^2=30 \text{ we have:}\\
+e^{-7\theta+(1/2)30\theta^2}=e^{-7\theta+15\theta^2}\\ 
+\text{Thus } Z\sim N(-7,30)\\
+P(Z>0)= 1-pnorm(q=0,mean = -7,sd=sqrt(30))=.1006 \quad \text{(using R)}\\
+\end{multline*}
+\end{enumerate}
+\section*{Problem 4}
+\begin{enumerate}[(a)]
+\item
+\begin{multline*}
+X_1, X_2 \sim N(0,1) \text{ and independent}\\
+f_{X_1X_2}(x_1,x_2)=f_{X_1}(x_1)f_{X_2}(x_2)=\dfrac{1}{2\pi}e^{-x_1^2/2}e^{-x_2^2/2}\\
+Y_1=X_1-3X_2+2\\
+Y_2=2X_1-X_2-1\\
+\text{Then } X_1=(-1/5)Y_1+(3/5)Y_2+1=g_1(y_1,y_2)\\
+X_2=(-2/5)Y_1+(1/5)Y_2+1=g_2(y_1,y_2)\\
+J=\begin{bmatrix}
+-1/5 & 3/5\\
+-2/5 & 1/5
+\end{bmatrix}=1/5\\
+=f_{X_1X_2}(g_1(y_1,y_2),g_2(y_1,y_2))|J|\\
+=\dfrac{1}{2\pi}e^{(-1/2)((-1/5)y_1+(3/5)y_2+1)^2}e^{(-1/2)((-2/5)y_1+(1/5)y_2+1)^2}(1/5)\\
+=\dfrac{1}{10\pi}e^{(-1/2)\left[(-1/5)y_1+(3/5)y_2+1)^2+(-2/5)y_1+(1/5)y_2+1)^2\right]}\\
+f_{\boldsymbol{Y}}(y_1,y_2)=\dfrac{1}{10\pi}e^{(-1/10)[y_1^2+2y_1y_2-6y_1+2y_2^2+8y_2+10]}\\
+\end{multline*}
+\item
+\begin{multline*}
+f_{Y_2}(y_2)=\int_{-\infty}^{\infty}f_{\boldsymbol{Y}}(y_1,y_2) \ dy_1\\
+=\dfrac{1}{10\pi}\int_{-\infty}^{\infty}e^{(-1/10)[y_1^2+2y_1y_2-6y_1+2y_2^2+8y_2+10]} \ dy_1\\
+=\dfrac{1}{10\pi}\sqrt{10\pi}e^{-(1/10)(y_2+1)^2}\\
+f_{Y_2}(y_2)=\dfrac{1}{\sqrt{10\pi}}e^{-(1/10)(y_2+1)^2}\\
+f_{Y_1|Y_2}=\dfrac{f_{Y_1Y_2}}{f_{Y_2}}\\
+=\dfrac{1}{10\pi}e^{(-1/10)[y_1^2+2y_1y_2-6y_1+2y_2^2+8y_2+10]}/\left[\dfrac{1}{\sqrt{10\pi}}e^{-(1/10)(y_2+1)^2}\right]\\
+=\dfrac{1}{\sqrt{10\pi}}e^{(-1/10)[y_1^2+2y_1y_2-6y_1+2y_2^2+8y_2+10]}e^{(1/10)(y_2+1)^2}\\
+=\dfrac{1}{\sqrt{10\pi}}e^{-(1/10)[y_1^2+2y_1y_2-6y_1+2y_2^2+8y_2+10-y_2^2-2y_2-1]}\\
+f_{Y_1|Y_2}=\dfrac{1}{\sqrt{10\pi}}e^{-(1/10)[y_1^2+2y_1y_2-6y_1+y_2^2+6y_2+9]}\\
+\end{multline*}
+\end{enumerate}
+\section*{Problem 5}
 
-
-
+\section*{Problem 6}
 \end{flushleft}
 \end{document}
