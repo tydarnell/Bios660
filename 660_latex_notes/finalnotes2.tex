@@ -34,13 +34,21 @@ $\Gamma(1/2)=\sqrt{\pi}$\\
 $f(x|\alpha,\beta)=\dfrac{1}{\Gamma(\alpha) \beta^\alpha}x^{\alpha-1}e^{-x/\beta}$\\
 $\alpha$ is the shape parameter, influences the peakedness of the distribution\\
 $\beta$ is the scale parameter, influences the spread of the distribution\\
+$EX^v=\dfrac{\beta^v \Gamma(v+\alpha)}{\Gamma(\alpha)}$\\
+$\Gamma(\alpha+v)=\int_{0}^{\infty}x^{v+\alpha-1}e^{-x} \ \dx$\\
 $EX=\alpha \beta$\\
-$\int_{0}^{\infty}e^{x^2/2} \ dz=\dfrac{\sqrt{2\pi}}{2}=\sqrt{\dfrac{\pi}{2}}$\\
+$\int_{0}^{\infty}e^{-x^2/2} \ dz=\dfrac{\sqrt{2\pi}}{2}=\sqrt{\dfrac{\pi}{2}}$\\
+$\int_{0}^{\infty}x^2e^{-x^2}$ is the same\\
 \subsection*{Beta Distribution}
 $f(x|\alpha,\beta)=\dfrac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$\\
-$B(\alpha,\beta)=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1} \ \dx$ Beta Function\\ 
+Beta Function: $B(\alpha,\beta)=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1} \ \dx$ \\ 
 $B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$\\
 $EX^n=\dfrac{B(\alpha+n,\beta)}{B(\alpha,\beta)}=\dfrac{\Gamma(\alpha+n)\Gamma(\alpha+\beta)}{\Gamma(\alpha+\beta+n)\Gamma(\alpha)}$\\
-
+\subsection*{Mgfs}
+Negative Binomial Mgf $\left(\dfrac{p}{1-(1-p)e^t}\right)^r$\\
+\subsection*{Exponential Families}
+A family of pdfs or pmfs is called an exponential family if it can be expressed as
+\[f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
+\]
 \end{flushleft}
 \end{document}
