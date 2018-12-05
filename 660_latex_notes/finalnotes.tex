@@ -25,8 +25,50 @@
 \allowdisplaybreaks
 \begin{document}
 \begin{flushleft}
-\chead{Notes 14}
+\chead{Previous Topics}
+\section*{Previous Topics}
+\subsection*{Distributions}
+\textbf{Poisson}\\
+Expresses the probability of a given number of events occuring during a fixed interval of time or space if these events occur with a known constant rate independently of the time since the last event.\\
+$\dfrac{\lambda^k e^{-\lambda}}{k!}$\medbreak
+\textbf{Geometric}\\
+The probability distribution of the number X of bernoulli trials needed to get one success.\\
+$(1-p)^{k-1}p$\\
+$1-(1-p)^k$\medbreak
+\textbf{Binomial}\\
+distribution of the number of successes in a sequence of n independent bernoulli trials.\\
+$\binom{n}{k} p^k(1-p)^{n-k}$ \medbreak
+\textbf{Negative Binomial}\\
+number of successes in a sequence of iid bernoulli trials before a specified number of failures (r).\\
+$\binom{k+r-1}{k}(1-p)^r p^k$\medbreak
+\textbf{Hypergeometric}\\
+The result of each draw (the elements of the population being sampled) can be classified into two mutually exclusive categories ie pass/fail.\\
+The probability of a success changes on each draw, as each draw decreases the population (sampling without replacement from a finite population)\\
+N=population size\\
+K=number of success in the population\\
+n= number of draws\\
+k=number of observed successes\\
+$\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$\medbreak
+\textbf{Exponential}\\
+describes the waiting time between Poisson events, Memoryless\\
+$\lambda e^{-\lambda x}$\\
+$1-e^{-\lambda x}$\medbreak
+\textbf{Normal}\\
+$\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}}$\medbreak
+\textbf{Gamma}\\
+$\dfrac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x\beta}$\medbreak
+\textbf{Beta}\\
+$\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$\\
+where $B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$ \medbreak
+\text{Uniform Continuous}\\
+symmetric probability distribution where all intervals of the same length are equally probable.\\
+$\dfrac{1}{b-a}$\\
+$\dfrac{x-a}{b-a}$\medbreak
+\textbf{Uniform Discrete}\\
+a symmetric probability distribution where a finite number of values are equally likely to be observed. Every one of n values has an equal probability 1/n.\\
+$\dfrac{1}{n}$\medbreak
 \section*{Notes 14}
+\chead{Notes 14}
 \subsection*{Convolution}
 If X and Y are independent continuous r.v.s with pdfs $f_X(x)$ and $f_Y(y)$, then the pdf of $Z=X+Y$ is:
 \[f_Z(z)=\int_{-\infty}^{\infty}f_X(w)f_Y(z-w)\ dw
@@ -102,7 +144,6 @@ If X and Y are uncorrelated this does not imply independence.\\
 $Cov(aX+B_Y,Z)=aCov(X,Z)+bCov(Y,Z)$\medbreak
 $Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y)$\medbreak
 $Corr(aX+b,cY+d)=\dfrac{ac}{|ac|}Corr(X,Y)$
-
 \subsection*{Standard Bivariate Normal}
 $f_{XY}(x,y)=\dfrac{1}{2\pi\sqrt{1-\rho^2}}\exp{\left[-\dfrac{x^2-2\rho xy+y^2}{2(1-\rho^2)}\right]}$\\
 Both X and Y have marginal distributions are $N(0,1)$\\
@@ -130,16 +171,13 @@ If $\boldsymbol{X}$ is continuous then:\\
 $P(\boldsymbol{X}\in A)=\int \cdots \int_{A}f(x_1,\dots,x_n)dx_1,\dots dx_n$\medbreak
 \subsection*{Marginals and Conditionals}
 The \textbf{marginal} pdf or pmf of any subset of coordinates is found by integrating or summing the joint pdf or pmf over all possible values of the other coordinates.\medbreak
-
 The \textbf{conditional} pdf or pmf of a subset of coordinates given the values of the remaining coordinates is found by dividing the full joint pdf or pmf by the joint pdf or pmf of the remaining variables.
-
 \subsection*{Multivariate Independence}
 Independent Random Vectors:\\
 Let $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ be random vectors with joint pdf or pmf $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$\\
 Let $f\boldsymbol{X_j}(\boldsymbol{x_j})$ be the marginal pdf or pmf of $\boldsymbol{X_j}$.\\
 Then $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ are \textbf{mutually independent} random vectors if:\\
 $\forall$ $(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$: \quad  $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})=\prod_{j=1}^{n}f\boldsymbol{X_j}(\boldsymbol{x_j})$
-
 \section*{Notes 16}
 \chead{Notes 16}
 \subsection*{Inequalities}
