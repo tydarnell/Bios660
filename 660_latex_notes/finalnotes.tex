@@ -34,45 +34,54 @@
 \begin{document}
 \tableofcontents
 \chapter{Distributions}
+\section{Bernoulli}
+$p^x(1-p)^{1-x} \quad x=0,1$\\
+$EX=p \quad VarX=p(1-p)$
 \section{Poisson}
 Expresses the probability of a given number of events occuring during a fixed interval of time or space if these events occur with a known constant rate independently of the time since the last event.\\
-$\dfrac{\lambda^k e^{-\lambda}}{k!}$\medbreak
+$\dfrac{\lambda^x e^{-\lambda}}{x!}$\medbreak
+$EX=\lambda \quad VarX= \lambda$
 \section{Geometric}
 The probability distribution of the number X of bernoulli trials needed to get one success.\\
-$(1-p)^{k-1}p$\\
-$1-(1-p)^k$\medbreak
+$(1-p)^{x-1}p \quad x=1,\dots$\\
+$1-(1-p)^x$\medbreak
+$EX=\dfrac{1}{p} \quad VarX=\dfrac{1-p}{p^2}$
 \section{Binomial}
 distribution of the number of successes in a sequence of n independent bernoulli trials.\\
-$\binom{n}{k} p^k(1-p)^{n-k}$ \medbreak
+$\binom{n}{x} p^x(1-p)^{n-x}$ \medbreak
+$EX=np \quad VarX=np(1-p)$
 \section{Negative Binomial}
 number of successes in a sequence of iid bernoulli trials before a specified number of failures (r).\\
 $\binom{k+r-1}{k}(1-p)^r p^k$\medbreak
-Negative Binomial Mgf $\left(\dfrac{p}{1-(1-p)e^t}\right)^r$
+Negative Binomial Mgf $\left(\dfrac{p}{1-(1-p)e^t}\right)^r$\\
+$EX=\dfrac{r(1-p)}{p} \quad VarX=\dfrac{r(1-p)}{p^2}$
 \section{Hypergeometric}
 The result of each draw (the elements of the population being sampled) can be classified into two mutually exclusive categories ie pass/fail.\\
 The probability of a success changes on each draw, as each draw decreases the population (sampling without replacement from a finite population)\\
 N=population size\\
-K=number of success in the population\\
-n= number of draws\\
-k=number of observed successes\\
-$\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$
+M=number of success in the population\\
+K= number of draws\\
+x=number of observed successes\\
+$\dfrac{\binom{M}{x}\binom{N-M}{K-x}}{\binom{N}{K}}$\\
+$EX=\dfrac{KM}{N} \quad VarX= \dfrac{KM}{N}\dfrac{(N-M)(N-K)}{N(N-1)}$
 \section{Exponential}
 describes the waiting time between Poisson events, Memoryless\\
-$\lambda e^{-\lambda x}$\\
+$\lambda e^{-\lambda x} \quad 0\leq x<\infty \quad \lambda>0$\\
 $1-e^{-\lambda x}$\medbreak
+$EX=\dfrac{1}{\lambda} \quad VarX=\dfrac{1}{\lambda^2}$
 \section{Normal}
-$\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}}$
-\textbf{Beta}\\
-$\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$\\
-where $B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$ \medbreak
+$\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}}$\\
+$EX=\mu \quad VarX=\sigma^2$
 \section{Uniform}
-\text{Uniform Continuous}
+\subsection{Uniform Continuous}
 symmetric probability distribution where all intervals of the same length are equally probable.\\
 $\dfrac{1}{b-a}$\\
 $\dfrac{x-a}{b-a}$\medbreak
-\textbf{Uniform Discrete}\\
+$EX=\dfrac{b+a}{2} \quad VarX=\dfrac{(b-a)^2}{12}$
+\subsection{Uniform Discrete}
 a symmetric probability distribution where a finite number of values are equally likely to be observed. Every one of n values has an equal probability 1/n.\\
-$\dfrac{1}{n}$\medbreak
+$\dfrac{1}{n} \quad x=1,\dots,N \quad N=1,\dots$\medbreak
+$EX=\dfrac{N+1}{2} \quad VarX=\dfrac{(N+1)(N-1)}{12}$
 \section{Gamma Distribution}
 Gamma Function: $\Gamma(\alpha)=\int_{0}^{\infty}t^{\alpha-1}e^{-t} \ dt$\\
 $\Gamma(\alpha+1)=\alpha \Gamma(\alpha) \ \alpha>0$\\
@@ -88,8 +97,7 @@ $Var(X)=ab^2$ alternatively $a/\lambda^2$\\
 $\int_{0}^{\infty}e^{-x^2/2} \ dz=\dfrac{\sqrt{2\pi}}{2}=\sqrt{\dfrac{\pi}{2}}$\\
 $\int_{0}^{\infty}x^2e^{-x^2}$ is the same\\
 \section{Beta Distribution}
-sample space: $(0,1)$\\
-$f(x|\alpha,\beta)=\dfrac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$\\
+$f(x|\alpha,\beta)=\dfrac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1} \quad 0\leq x\leq 1$\\
 Beta Function: $B(\alpha,\beta)=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1} \ \dx$ \\ 
 $B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$\\
 $EX^n=\dfrac{B(\alpha+n,\beta)}{B(\alpha,\beta)}=\dfrac{\Gamma(\alpha+n)\Gamma(\alpha+\beta)}{\Gamma(\alpha+\beta+n)\Gamma(\alpha)}$\\
