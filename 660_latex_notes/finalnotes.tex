@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[openany]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
@@ -13,7 +13,16 @@
 \fancyhf{}
 \rhead{Ty Darnell}
 \lhead{Final Notes}
-
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Bios * Notes},
+	pdfauthor={Ty Darnell},
+	bookmarksopen=true,
+}
 % For derivatives
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 
@@ -22,58 +31,101 @@
 
 % Integral dx
 \newcommand{\dx}{\mathrm{d}x}
-\allowdisplaybreaks
 \begin{document}
-\begin{flushleft}
-\chead{Previous Topics}
-\section*{Previous Topics}
-\subsection*{Distributions}
-\textbf{Poisson}\\
+\tableofcontents
+\chapter{Distributions}
+\section{Poisson}
 Expresses the probability of a given number of events occuring during a fixed interval of time or space if these events occur with a known constant rate independently of the time since the last event.\\
 $\dfrac{\lambda^k e^{-\lambda}}{k!}$\medbreak
-\textbf{Geometric}\\
+\section{Geometric}
 The probability distribution of the number X of bernoulli trials needed to get one success.\\
 $(1-p)^{k-1}p$\\
 $1-(1-p)^k$\medbreak
-\textbf{Binomial}\\
+\section{Binomial}
 distribution of the number of successes in a sequence of n independent bernoulli trials.\\
 $\binom{n}{k} p^k(1-p)^{n-k}$ \medbreak
-\textbf{Negative Binomial}\\
+\section{Negative Binomial}
 number of successes in a sequence of iid bernoulli trials before a specified number of failures (r).\\
 $\binom{k+r-1}{k}(1-p)^r p^k$\medbreak
-\textbf{Hypergeometric}\\
+Negative Binomial Mgf $\left(\dfrac{p}{1-(1-p)e^t}\right)^r$
+\section{Hypergeometric}
 The result of each draw (the elements of the population being sampled) can be classified into two mutually exclusive categories ie pass/fail.\\
 The probability of a success changes on each draw, as each draw decreases the population (sampling without replacement from a finite population)\\
 N=population size\\
 K=number of success in the population\\
 n= number of draws\\
 k=number of observed successes\\
-$\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$\medbreak
-\textbf{Exponential}\\
+$\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$
+\section{Exponential}
 describes the waiting time between Poisson events, Memoryless\\
 $\lambda e^{-\lambda x}$\\
 $1-e^{-\lambda x}$\medbreak
-\textbf{Normal}\\
-$\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}}$\medbreak
-\textbf{Gamma}\\
-$\dfrac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}e^{-x\beta}$\medbreak
+\section{Normal}
+$\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{(x-\mu)^2}{2\sigma^2}}$
 \textbf{Beta}\\
 $\dfrac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$\\
 where $B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$ \medbreak
-\text{Uniform Continuous}\\
+\section{Uniform}
+\text{Uniform Continuous}
 symmetric probability distribution where all intervals of the same length are equally probable.\\
 $\dfrac{1}{b-a}$\\
 $\dfrac{x-a}{b-a}$\medbreak
 \textbf{Uniform Discrete}\\
 a symmetric probability distribution where a finite number of values are equally likely to be observed. Every one of n values has an equal probability 1/n.\\
 $\dfrac{1}{n}$\medbreak
-\section*{Notes 14}
-\chead{Notes 14}
-\subsection*{Convolution}
+\section{Gamma Distribution}
+Gamma Function: $\Gamma(\alpha)=\int_{0}^{\infty}t^{\alpha-1}e^{-t} \ dt$\\
+$\Gamma(\alpha+1)=\alpha \Gamma(\alpha) \ \alpha>0$\\
+$\Gamma(n)=(n-1)! \quad n \in \mathbb{Z}$\\
+$\Gamma(1/2)=\sqrt{\pi}$\\
+$f(x|\alpha,\beta)=\dfrac{1}{\Gamma(\alpha) \beta^\alpha}x^{\alpha-1}e^{-x/\beta}$\\
+$\alpha$ is the shape parameter, influences the peakedness of the distribution\\
+$\beta$ is the scale parameter, influences the spread of the distribution\\
+$EX^v=\dfrac{\beta^v \Gamma(v+\alpha)}{\Gamma(\alpha)}$\\
+$\Gamma(\alpha+v)=\int_{0}^{\infty}x^{v+\alpha-1}e^{-x} \ \dx$\\
+$EX=\alpha \beta$ alternatively $a/\lambda$ $\lambda=1/\beta$\\
+$Var(X)=ab^2$ alternatively $a/\lambda^2$\\
+$\int_{0}^{\infty}e^{-x^2/2} \ dz=\dfrac{\sqrt{2\pi}}{2}=\sqrt{\dfrac{\pi}{2}}$\\
+$\int_{0}^{\infty}x^2e^{-x^2}$ is the same\\
+\section{Beta Distribution}
+sample space: $(0,1)$\\
+$f(x|\alpha,\beta)=\dfrac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$\\
+Beta Function: $B(\alpha,\beta)=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1} \ \dx$ \\ 
+$B(\alpha,\beta)=\dfrac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$\\
+$EX^n=\dfrac{B(\alpha+n,\beta)}{B(\alpha,\beta)}=\dfrac{\Gamma(\alpha+n)\Gamma(\alpha+\beta)}{\Gamma(\alpha+\beta+n)\Gamma(\alpha)}$\\
+$E(X)=\dfrac{a}{a+b}$\\
+$Var(X)=\dfrac{ab}{(a+b)^2(a+b+1)}$\\
+$beta(1,1)=U(0,1)$
+\section{Mgfs}
+\includegraphics[scale=1]{mgfchar.png}
+\section{Location and Scale Families}
+\[f_{\mu,\sigma}(x)=\dfrac{1}{\sigma}f\left(\dfrac{x-\mu}{\sigma} \right)
+\]
+$\mu \in \mathbb{R} \quad \sigma>0$ is a location scale family\\
+If $\mu=0$ scale family\\
+If $\sigma=1$ location family\\
+Properties: Let $Z\sim f(z)$ and $X=\sigma Z+\mu$ Then\\
+X has pdf $f_{\mu,\sigma}$\\
+$E(X)=\sigma E(Z)+\mu \quad Var(X)=\sigma^2 Var(Z)$
+
+\chapter{Notes 13}
+\section{Conditional Probability}
+\[f(y|x)=\dfrac{f(x,y)}{f(x)}
+\]
+\section{Exponential Families}
+A family of pdfs or pmfs is called an exponential family if it can be expressed as
+\[f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
+\]
+\section{Multinomial Distribution}
+$p(s_1,s_2,\dots,s_k)=\dfrac{n!}{s_1!s_2!\dots s_k!}p_1^{s_1}p_2^{s_2}\cdots p_k^{s_k}$\\
+where $\sum_{i=1}^{k}s_1=n$ and $\sum_{i=1}^{k}p_i=1$\\
+
+\chapter{Notes 14}
+\section{Convolution}
 If X and Y are independent continuous r.v.s with pdfs $f_X(x)$ and $f_Y(y)$, then the pdf of $Z=X+Y$ is:
 \[f_Z(z)=\int_{-\infty}^{\infty}f_X(w)f_Y(z-w)\ dw
 \]
-\subsection*{Sum of Two Independent Poissons}
+\section{Sum of Two Independent Poissons}
 $X\sim Pois(\lambda_1), \ Y\sim Pois(\lambda_2)$\\
 $U=X+Y \ V=Y$\\
 $X=U-V \ Y=V$\\
@@ -85,18 +137,18 @@ $=\dfrac{e^{-(\lambda_1+\lambda_2)}}{u!}\sum_{v=0}^{u} {u \choose v}\lambda_1^{u
 Because of the binomial theorem\medbreak
 $=\dfrac{e^{-(\lambda_1+\lambda_2)}}{u!}(\lambda_1+\lambda_2)^u$\medbreak
 $U\sim Pois(\lambda_1+\lambda_2)$
-\subsection*{Jacobian}
+\section{Jacobian}
 $J(u,v)$ is the Jacobian of the transformation $(x,y)\to (u,v)$ given by:\medbreak
 $J(u,v)=\dfrac{\partial(x,y)}{\partial(u,v)}=
 \begin{bmatrix}
 \dfrac{\partial x}{\partial u}& \dfrac{\partial x}{\partial v}\\
 \dfrac{\partial y}{\partial u}& \dfrac{\partial y}{\partial v}\\
 \end{bmatrix}$
-\subsection*{Functions of Independent Random Variables}
+\section{Functions of Independent Random Variables}
 Let X and Y be independent r.v.s\\
 Let $g:\mathbb{R}\to \mathbb{R}$ and $h:\mathbb{R}\to \mathbb{R}$ be functions\\
 Then the r.v.s $U=g(X)$ and $V=h(Y)$ are independent
-\subsection*{Ratio of Two Independent Normals}
+\section{Ratio of Two Independent Normals}
 Let $X \sim N(0,1)$ and $Y\sim N(0,1)$\\
 The ratio $X/Y$ has the Cauchy distribution\\
 Let $U=X/Y$ and $V=Y$ \quad Then $X=UV$ and $Y=V$ \quad $J(u,v)=v$\\
@@ -104,7 +156,7 @@ $f_{X,Y}(x,y)=\dfrac{1}{\sqrt{2\pi}}e^{-x^2/2}\dfrac{1}{\sqrt{2\pi}}e^{-y^2/2}=\
 $f_{U,V}(uv,v)=\dfrac{1}{2\pi}e^{-[(uv)^2+v^2]/2}*|v|=\dfrac{|v|}{2\pi}e^{-(u^2+1)v^2/2}$\\
 $f_{U}(u)=\int_{-\infty}^{\infty}f_{UV}(u,v) \ dv=2\int_{0}^{\infty}\dfrac{v}{2\pi}e^{-(u^2+1)v^2/2} \ dv$\\
 $=\dfrac{1}{\pi}\int_{0}^{\infty}e^{-(u^2+1)z} \ dz=\dfrac{1}{\pi(u^2+1)}$
-\subsection*{Sum of Two Independent Random Variables}
+\section{Sum of Two Independent Random Variables}
 Suppose X and Y are independent, find distribution of $Z=X+Y$\\
 In general: $F_Z(z)=P(X+Y\leq z)=P(\{(x,y) \text{ such that } x+y\leq z\})$\\
 Approaches:
@@ -117,9 +169,11 @@ $f_Z(z)=\sum_{x+y=z}f_X(x)f_Y(y)=\sum_{x}f_X(x)f_Y(z-x)$\\
 $\phi_Z{\theta}=\phi_X(\theta)\phi_Y(\theta)$\\
 $Z=X-Y \quad \phi_Z{\theta}=\phi_X(\theta)\phi_Y(-\theta)$
 \end{itemize}
-\section*{Notes 15}
-\chead{Notes 15}
-\subsection*{Conditional Expectation and Variance}
+\chapter{Notes 15}
+\section{Conditional Expectation and Variance}
+For two r.v.s X and Y with conditional pdf $f_{Y|X}(y|x)$ the conditional expectation of $g(Y)$ give $X=x$ is:\\
+$h(x)=E[g(Y)|x]=\int_{-\infty}^{\infty}g(y)f_{Y|X}(y|x) \ dy$\\
+$h(X)=E[g(Y)|X]$\\
 \textbf{Iterative Expectation Formula}\\
 $EX=E(E(X|Y))$\\
 \textbf{Variance}\\
@@ -131,7 +185,7 @@ where both expectations are taken with respect to $f_{Y||X}(y)$\\
 \item $E(Var(X|Y))=E\{[X-E(X|Y)]^2\}$\\
 \item $Var(E(X|Y))=E\{[E(X|Y)-EX]^2\}$\\
 \end{itemize}
-\subsection*{Covariance and Correlation}
+\section{Covariance and Correlation}
 $Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=\sigma_{XY}$\\
 Correlation =$\rho_{XY}=\dfrac{Cov(X,Y)}{\sqrt{VarX \ VarY}}=\dfrac{\sigma_{XY}}{\sigma_X \sigma_Y}$\\
 $=E\left[ \left( \dfrac{X-\mu_X}{\sigma_X} \right) \left( \dfrac{Y-\mu_Y}{\sigma_Y} \right) \right]$\medbreak
@@ -140,18 +194,18 @@ $Cov(X,Y)=0$ or equivalently $\rho_{XY}=0$\\
 $Cov(X,Y)=E(XY)-E(X)E(Y)$\\
 If X and Y are independent and $Cov(X,Y)$ exists, then $Cov(X,Y)=0$\\
 If X and Y are uncorrelated this does not imply independence.\\
-\subsection*{Linear Combinations}
+\section{Linear Combinations}
 $Cov(aX+B_Y,Z)=aCov(X,Z)+bCov(Y,Z)$\medbreak
 $Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y)$\medbreak
 $Corr(aX+b,cY+d)=\dfrac{ac}{|ac|}Corr(X,Y)$
-\subsection*{Standard Bivariate Normal}
+\section{Standard Bivariate Normal}
 $f_{XY}(x,y)=\dfrac{1}{2\pi\sqrt{1-\rho^2}}\exp{\left[-\dfrac{x^2-2\rho xy+y^2}{2(1-\rho^2)}\right]}$\\
 Both X and Y have marginal distributions are $N(0,1)$\\
 Correlation of X and Y is $\rho$\\
 Conditional Distribution are normal:\\
 $Y|X \sim N(\rho X,1-\rho^2) \quad X|Y \sim N(\rho Y, 1-\rho^2)$\\
 The means are the regression lines of Y on X and X on Y respectively.
-\subsection*{Bivariate Normal}
+\section{Bivariate Normal}
 Let $\tilde{X}$ and $\tilde{Y}$ have a standard bivariate normal distribution with correlation $\rho$\\
 Let $X=\mu_X+\sigma_X\tilde{X} \quad Y=\mu_Y+\sigma_Y\tilde{Y}$\\
 Then $(X,Y)$ has the bivariate normal density:\\
@@ -162,27 +216,34 @@ Conditional distributions are normal:\\
 $Y|X \sim N[\mu_Y+\rho(\sigma_Y/\sigma_X)(x-\mu_X),\sigma^2_Y(1-\rho^2)]$\medbreak
 Distribution of $aX+bY$ is:\\
 $N(a\mu_X+b\mu_Y,a^2\sigma^2_X+b^2\sigma^2_Y+2ab\rho \sigma_X \sigma_Y)$
-\subsection*{Multivariate Distributions}
+\section{Multivariate Distributions}
 $\boldsymbol{X}=(X_1,X_2,\dots, X_n)$\\
 If $\boldsymbol{X}$ is discrete then:\\
 $P(\boldsymbol{X} \in A)=\sum_{\boldsymbol{X} \in A} f(\boldsymbol{X})$\\
 where $f(\boldsymbol{X})$ is the joint pmf\\
 If $\boldsymbol{X}$ is continuous then:\\
 $P(\boldsymbol{X}\in A)=\int \cdots \int_{A}f(x_1,\dots,x_n)dx_1,\dots dx_n$\medbreak
-\subsection*{Marginals and Conditionals}
+\section{Marginals and Conditionals}
 The \textbf{marginal} pdf or pmf of any subset of coordinates is found by integrating or summing the joint pdf or pmf over all possible values of the other coordinates.\medbreak
 The \textbf{conditional} pdf or pmf of a subset of coordinates given the values of the remaining coordinates is found by dividing the full joint pdf or pmf by the joint pdf or pmf of the remaining variables.
-\subsection*{Multivariate Independence}
+\section{Multivariate Independence}
 Independent Random Vectors:\\
 Let $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ be random vectors with joint pdf or pmf $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$\\
 Let $f\boldsymbol{X_j}(\boldsymbol{x_j})$ be the marginal pdf or pmf of $\boldsymbol{X_j}$.\\
 Then $\boldsymbol{X_1},\dots,\boldsymbol{X_n}$ are \textbf{mutually independent} random vectors if:\\
 $\forall$ $(\boldsymbol{X_1},\dots,\boldsymbol{X_n})$: \quad  $f(\boldsymbol{X_1},\dots,\boldsymbol{X_n})=\prod_{j=1}^{n}f\boldsymbol{X_j}(\boldsymbol{x_j})$
-\section*{Notes 16}
-\chead{Notes 16}
-\subsection*{Inequalities}
+\section{Multinomial}
+Let n and m be positive integers and let $p_1,\dots,p_n$ be probabilities summing to one. Then the random vector $(X_1,\dots,X_n)$ has a multinomial distribution with m trials and cell probabilities $p_1,\dots,p_n$ if its joint pmf is:
+\begin{align*}
+f(x_1,\dots,x_n)&={m \choose x_1,\cdots,x_n} p_1^{x_1}\cdots p_n^{x_n}\\
+&=\dfrac{m!}{x_1! \dots x_n!}p_1^{x_1}\cdots p_n^{x_n}\\
+&= m!\prod_{j=1}^{n}\dfrac{p_j^{x_j}}{x_j!}
+\end{align*}
+for $x_1=0,\dots,m \quad i=1,\dots,n \quad x_1+\cdots+x_n=m$
+\chapter{Notes 16}
+\section{Inequalities}
 \textbf{Chebychev Inequality}\\
-$p[g(X)\geq r]leq \dfrac{E[g(X)]}{r}$\\
+$P[g(X)\geq r] \leq \dfrac{E[g(X)]}{r}$\\
 If X is nonnegative and g is a positive non-decreasing function then:\\
 $P\{X\geq a \}\leq \dfrac{E[g(X)]}{g(a)}$\\
 \textbf{Special Cases:}\\
@@ -223,7 +284,7 @@ Then $|p|\leq 1$ with equality iff $Y-\mu_Y=c(X-\mu_X)$\\
 \textbf{Minkowski's Inequality}\\
 Suppose $X,Y \in L^p, p\geq 1$ Then $(X+Y)\in L^p$ and\\
 $[E|X+Y|^p]^{1/p}\leq [E|X|^p]^{1/p}+[E|Y|^p]^{1/p}$\\
-\subsection*{Order Statistics}
+\section{Order Statistics}
 \textbf{Distribution of the Maximum}\\
 The cdf of $Z=max(Y_1,\dots,Y_n)$ is\\
 \begin{align*}
@@ -267,5 +328,4 @@ n!f_X(x_1)\cdots f_X(x_n) \quad -\infty<x_1<\cdots<x_n<\infty\\
 0 \quad \text{otherwise}
 \end{cases}
 \]
-\end{flushleft}
 \end{document}
