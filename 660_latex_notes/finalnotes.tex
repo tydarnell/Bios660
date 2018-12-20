@@ -8,11 +8,6 @@
 \usepackage{mathtools}
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage{caption}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{Ty Darnell}
-\lhead{Final Notes}
 \usepackage{hyperref}
 \hypersetup{
 	colorlinks=true,
@@ -33,6 +28,7 @@
 \newcommand{\dx}{\mathrm{d}x}
 \begin{document}
 \tableofcontents
+\begin{flushleft}
 \chapter{Distributions}
 \section{Bernoulli}
 $p^x(1-p)^{1-x} \quad x=0,1$\\
@@ -117,16 +113,25 @@ X has pdf $f_{\mu,\sigma}$\\
 $E(X)=\sigma E(Z)+\mu \quad Var(X)=\sigma^2 Var(Z)$
 
 \chapter{Notes 13}
-\section{Conditional Probability}
-\[f(y|x)=\dfrac{f(x,y)}{f(x)}
-\]
+\section{Multinomial Distribution}
+$p(s_1,s_2,\dots,s_k)=\dfrac{n!}{s_1!s_2!\dots s_k!}p_1^{s_1}p_2^{s_2}\cdots p_k^{s_k}$\\
+where $\sum_{i=1}^{k}s_1=n$ and $\sum_{i=1}^{k}p_i=1$
 \section{Exponential Families}
 A family of pdfs or pmfs is called an exponential family if it can be expressed as
 \[f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
 \]
-\section{Multinomial Distribution}
-$p(s_1,s_2,\dots,s_k)=\dfrac{n!}{s_1!s_2!\dots s_k!}p_1^{s_1}p_2^{s_2}\cdots p_k^{s_k}$\\
-where $\sum_{i=1}^{k}s_1=n$ and $\sum_{i=1}^{k}p_i=1$\\
+
+\section{Conditional Probability}
+Discrete:\\
+\begin{align*}
+P\{Y=y|X=x \}&=\dfrac{P(X=x,Y=y)}{P(X=x)}\\
+&=\dfrac{f_{X,Y}(x,y)}{f_X(x)}\\
+&=f_{Y|X}(y|x)
+\end{align*}
+Can rewrite as:\\
+\[P(X=x,Y=y)=P(Y=y|X=x)P(X=x)
+\]
+\textbf{Continuous}: $f(y|x)=\dfrac{f(x,y)}{f(x)}$
 
 \chapter{Notes 14}
 \section{Convolution}
@@ -179,20 +184,42 @@ $Z=X-Y \quad \phi_Z{\theta}=\phi_X(\theta)\phi_Y(-\theta)$
 \end{itemize}
 \chapter{Notes 15}
 \section{Conditional Expectation and Variance}
+\subsection{Expectation}
 For two r.v.s X and Y with conditional pdf $f_{Y|X}(y|x)$ the conditional expectation of $g(Y)$ give $X=x$ is:\\
+If discrete:\\
+$E[g(Y)|X=x]=\sum_{y}g(y)f_{Y|X}(y|x)$\\
+If continuous:\\
 $h(x)=E[g(Y)|x]=\int_{-\infty}^{\infty}g(y)f_{Y|X}(y|x) \ dy$\\
-$h(X)=E[g(Y)|X]$\\
+$h(X)=E[g(Y)|X]$\medbreak
 \textbf{Iterative Expectation Formula}\\
-$EX=E(E(X|Y))$\\
-\textbf{Variance}\\
+$EX=E(E(X|Y))$
+\subsection{Variance}
 $Var[g(Y)]=E[g(y)-E(g(Y))]^2$\medbreak
-$VarX=E(Var(X|Y))+Var(E(X|Y))$\\
+$VarX=E(Var(X|Y))+Var(E(X|Y))$\medbreak
 $Var(g(Y)|X)=E\{[g(Y)-E(g(Y)|X)]^2|X\}$\\
 where both expectations are taken with respect to $f_{Y||X}(y)$\\
 \begin{itemize}
 \item $E(Var(X|Y))=E\{[X-E(X|Y)]^2\}$\\
 \item $Var(E(X|Y))=E\{[E(X|Y)-EX]^2\}$\\
 \end{itemize}
+$Var(aX)=a^2 Var(x)$
+\section{Hierarchical Model Example}
+\begin{multline*}
+\text{An insect lays eggs according to a } Pois(\lambda) \text{ and each egg survives with probability p, independent}\\
+\text{Find average eggs surviving}\\
+Y\sim Pois(\lambda) \quad X|Y \sim Binom(Y,p) \quad \text{Where X is total eggs surviving}\\
+P(X=x)=\sum_{y=0}^{\infty}P(X=x,Y=y)\\
+=\sum_{y=0}^{\infty}P(X=x|Y=y)P(Y=y) \text{ using conditional expectation}\\
+=\sum_{y=x}^{\infty}\left[{y \choose x} p^x(1-p)^{y-x} \right] \left[\dfrac{e^{-\lambda }\lambda^y}{y!} \right]\\
+=\dfrac{(\lambda p)^x e^{-\lambda}}{x!}\sum_{y=x}^{\infty}\dfrac{((1-p)\lambda)^{y-x}}{(y-x!)}\\
+\text{Since } e^x=\sum_{k=0}^{\infty}\dfrac{x^k}{k!}\\
+\text{Let } x=(1-p)\lambda \quad k=y-x\\
+\dfrac{(\lambda p)^x e^{-\lambda}}{x!}e^{(1-p)\lambda}\\
+=\dfrac{(\lambda p)^x}{x!}e^{-\lambda p}\\
+\text{So } X\sim Pois(\lambda p) \quad EX=\lambda p\\
+\text{Using iterative expectation formula:}\\
+EX=E(E(X|Y))=E(Yp)=\lambda p\\
+\end{multline*}
 \section{Covariance and Correlation}
 $Cov(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=\sigma_{XY}$\\
 Correlation =$\rho_{XY}=\dfrac{Cov(X,Y)}{\sqrt{VarX \ VarY}}=\dfrac{\sigma_{XY}}{\sigma_X \sigma_Y}$\\
@@ -217,7 +244,8 @@ The means are the regression lines of Y on X and X on Y respectively.
 Let $\tilde{X}$ and $\tilde{Y}$ have a standard bivariate normal distribution with correlation $\rho$\\
 Let $X=\mu_X+\sigma_X\tilde{X} \quad Y=\mu_Y+\sigma_Y\tilde{Y}$\\
 Then $(X,Y)$ has the bivariate normal density:\\
-$f_{XY}(x,y)=\left(2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2} \right)^{-1}\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}$\medbreak
+$f_{XY}(x,y)=\left(2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2} \right)^{-1}$\\
+*$\exp{\left\{-\dfrac{1}{2(1-\rho^2)}\left[\left(\dfrac{x-\mu_X}{\sigma_X} \right)^2- 2\rho \left(\dfrac{x-\mu_X}{\sigma_X} \right)\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)+\left(\dfrac{y-\mu_Y}{\sigma_Y} \right)^2 \right] \right\}}$\medbreak
 Marginal distributions: $N(\mu_X,\sigma^2_X) \quad N(\mu_Y,\sigma^2_Y)$\\
 $Corr(X,Y)=\rho$\medbreak
 Conditional distributions are normal:\\
@@ -248,52 +276,53 @@ f(x_1,\dots,x_n)&={m \choose x_1,\cdots,x_n} p_1^{x_1}\cdots p_n^{x_n}\\
 &= m!\prod_{j=1}^{n}\dfrac{p_j^{x_j}}{x_j!}
 \end{align*}
 for $x_1=0,\dots,m \quad i=1,\dots,n \quad x_1+\cdots+x_n=m$
-\chapter{Notes 16}
-\section{Inequalities}
-\textbf{Chebychev Inequality}\\
+\chapter{Inequalities}
+\section{Chebychev Inequality}
 $P[g(X)\geq r] \leq \dfrac{E[g(X)]}{r}$\\
 If X is nonnegative and g is a positive non-decreasing function then:\\
 $P\{X\geq a \}\leq \dfrac{E[g(X)]}{g(a)}$\\
 \textbf{Special Cases:}\\
 $X\geq 0$ \quad $P\{X\geq a \}\leq \dfrac{E(e^{tX})}{e^{ta}}$\\
-$L^p$ Space- consists of all r.v.s whose $p^{th}$ absolute power is integrable, $E(|X|^p)<\infty$\\
-\textbf{Triangle Inequality}\\
+\section{$L^p$ Spaces}
+$L^p$ Space consists of all r.v.s whose $p^{th}$ absolute power is integrable, $E(|X|^p)<\infty$\\
+\section{Triangle Inequality}
 $|a+b|\leq |a|+|b|$\\
-\textbf{Convex Functions}\\
-A function $g: I\to R$ is convex for any $\lambda \in [0,1]$ and any points x and y in I\\
-$g[\lambda x+(1-\lambda)y]\leq \lambda g(x)+(1-\lambda)g(y)$\\
-A differentiable function g is convex iff it lays above all tangents.\\
-A twice differentiable function g is convex iff its second derivative is non-negative\\
-concave if -g is convex on I\\
-\textbf{Jensen's Inequality}\\
+\section{Jensen's Inequality}
 Let $X \in L^1$ and $g(x)$ be a convex function where $E[g(X)]$ exists. Then:\\
 $E[g(X)]\geq g[EX]$\\
 with equality iff for every line $a+bx$ tangent to $g(x)$ at $x=EX, P[g(X)=a+bX]=1$\\
 direction of inequality is reversed if g is concave\\
-\textbf{Young's Inequality}\\
+\subsection{Convex Functions}
+A function $g: I\to R$ is convex for any $\lambda \in [0,1]$ and any points x and y in I\\
+$g[\lambda x+(1-\lambda)y]\leq \lambda g(x)+(1-\lambda)g(y)$\\
+A differentiable function g is convex iff it lays above all tangents.\\
+A twice differentiable function g is convex iff its second derivative is non-negative\\
+concave if -g is convex on I
+\section{Young's Inequality}
 Let $a,b >0$ and $p,q>1$ with $1/p+1/q=1$ Then:\\
 $\dfrac{a^p}{p}+\dfrac{b^q}{q}\geq ab$\\
-with equality iff $a^p=b^q$\\
-\textbf{Holder's Inequality}\\
+with equality iff $a^p=b^q$
+\section{Holder's Inequality}
 Suppose $X \in L^p, Y \in L^q$ where $p,q>1$ and $1/p+1/q=1$ Then:\\
 $E[|XY|]\leq [E|X|^p]^{1/p}E[|Y|^q]^{1/q}$\\
-with equality if $X^p=cY^q$ for some $c \in \mathbb{R}$\\
-\textbf{Cauchy-Schwartz Inequality}\\
+with equality if $X^p=cY^q$ for some $c \in \mathbb{R}$
+\subsection{Cauchy-Schwartz Inequality}
 corollary of Holders where $p=q=2$\\
 $E[|XY|]\leq [E|X|^2]^{1/2}E[|Y|^2]^{1/2}=\sqrt{E[X^2]E[Y^2]}$\\
-with equality if $X=cY$\\
-\textbf{Lyapunov's Inequality}\\
+with equality if $X=cY$
+\subsubsection{Application of Cauchy-Schwartz}
+$p=\dfrac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$\\
+Then $|p|\leq 1$ with equality iff $Y-\mu_Y=c(X-\mu_X)$
+\subsection{Lyapunov's Inequality}
 corrallary of Holders\\
 for $1\leq r\leq s$ and $X\in L^s$\\
-$E[|X|^r]^{1/r}\leq E[|X|^s]^{1/s}$\\
-\textbf{Application of Cauchy-Schwartz}\\
-$p=\dfrac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$\\
-Then $|p|\leq 1$ with equality iff $Y-\mu_Y=c(X-\mu_X)$\\
-\textbf{Minkowski's Inequality}\\
+$E[|X|^r]^{1/r}\leq E[|X|^s]^{1/s}$
+\section{Minkowski's Inequality}
 Suppose $X,Y \in L^p, p\geq 1$ Then $(X+Y)\in L^p$ and\\
-$[E|X+Y|^p]^{1/p}\leq [E|X|^p]^{1/p}+[E|Y|^p]^{1/p}$\\
-\section{Order Statistics}
-\textbf{Distribution of the Maximum}\\
+$[E|X+Y|^p]^{1/p}\leq [E|X|^p]^{1/p}+[E|Y|^p]^{1/p}$
+\chapter{Order Statistics}
+\section{Min and Max}
+\subsection{Distribution of the Maximum}
 The cdf of $Z=max(Y_1,\dots,Y_n)$ is\\
 \begin{align*}
 F_Z(z)&= P\{Z\leq z \}\\
@@ -302,19 +331,19 @@ F_Z(z)&= P\{Z\leq z \}\\
 &=F_Y(z)^n \text{ ident. distrib}
 \end{align*}
 Thus the pmf is:\\
-$f_Z(z)=nF_Y(z)^{n-1}f_Y(z)$\\
-\textbf{Distribution of the Minimum}\\
+$f_Z(z)=nF_Y(z)^{n-1}f_Y(z)$
+\subsection{Distribution of the Minimum}
 $W=min(Y_1,\dots,Y_n)$\\
 $F_W(w)=1-(1-F_Y(w))^n$\\
-$f_W(w)=n(1-F_Y(w))^{n-1}f_Y(w)$\\
-\textbf{Order Statistics}\\
+$f_W(w)=n(1-F_Y(w))^{n-1}f_Y(w)$
+\section{Order Statistics}
 Let $Y_1,Y_2,\dots, Y_n$ be iid with pdf $f_Y(x)$\\
 Order the observations:\\
 $Y_{(1)}\leq Y_{(2)}\leq \cdots \leq Y_{(n)}$\\
 The $Y_{(i)}$ are called order statistics. Minimum is $Y_{(1)}$ max is $Y_{(n)}$\\
 We are interested in finding the distribution of an arbitrary $Y_{(i)}$ as well as the joint distributions of sets of $Y_{(i)}$s and $Y_{(j)}$s\\
-ex: Range=$Y_{(n)}-Y_{(1)}$\\
-$r^{th}$\textbf{ order statistic}\\
+ex: Range=$Y_{(n)}-Y_{(1)}$
+\section{$r^{th}$ Order Statistic}
 We need to find the density of $Y_{(r)}$ at a value y\\
 Consider 3 intervals $(-\infty,y),[y,y+dy),[y+dy,\infty)$\\
 The number of observations in each of the intervals follows the tri-nomial distribution:\\
@@ -326,14 +355,67 @@ $(n-r)$ observations are greater than y\\
 In the trinomial distribution this corresponds to:\\
 $s_1=r-1,s_2=1,s_3=n-r$\\
 $p_1=F_Y(y), p_2=f_Y(y)dy, p_3=1-F_Y(y+dy)$\\
-\textbf{Theorem 5.4.6}\\
+\[f_{Y_{(r)}}(y)=\dfrac{n!}{(r-1)!(n-r)!}F_Y(y)^{r-1}[1-F_Y(y)]^{n-r}f_Y(y)
+\]
+The above equation can also be written as:\\
+\[\dfrac{F_Y(y)^{r-1}[1-F_Y(y)]^{n-r}f_Y(y)}{B(r,n-r+1)}
+\]
+Since $\dfrac{1}{B(n,n-r+1)}=\dfrac{\Gamma(n+1)}{\Gamma(r)\Gamma(n-r+1)}$=$\dfrac{n!}{(r-1)!(n-r)!}$
+\subsection{Example with U(0,1)}
+\begin{multline*}
+F(y)=y \text{ that is } Y\sim U(0,1)\\
+f_{Y_{(r)}}=\dfrac{y^{r-1}(1-y)^{n-r}}{B(r,n-r+1)}\\
+Y_{(r)} \text{ follows a beta}(r,n-r+1)\text{ distribution }\\
+E[Y_{(r)}]=\dfrac{r}{n+1}\\
+\end{multline*}
+\section{Distribution of the Median}
+Suppose sample size is odd: $n=2m+1$\\
+Median is the $(m+1)^{th}$ order statistic\\
+set $r=m+1$ \quad $n=2m+1$ into rth order statistic formula giving us:
+\[f_{med}(y)=f_{Y_{m+1}}(y)=\dfrac{F_Y(y)^m(1-F_(y))^mf_Y(y)}{B(m+1,m+1)}
+\]
+if the density $f_Y(y)$ is symmetric around zero, so that $EY=0$ then:\\
+$F_Y(-y)=1-F_Y(y)$\\
+and so the density of the median is also symmetric around zero, so that:\\
+$E[med(Y_1,\dots,Y_n)]=0$ 
+\section{Joint Distribution of $X_{(i)}$ and $X_{(j)}$}
+Theorem 5.4.6 (from CB):\\
 Let $X_{(1)},\dots,X_{(n)}$ denote the order statistics of a random sample, $X_1,\dots, X_n$ from a continuous population with cdf $F_X(x)$ and pdf $f_X(x)$. Then the joint pdf of $X_{(i)}$ and $X_{(j)}$, $1\leq i <j\leq n$, is:
 \[f_{X_{(i)},X_{(j)}}(u,v)=\dfrac{n!}{(i-1)!(j-1-i)!(n-j)!}f_X(u)f_X(v)[F_X(u)]^{i-1}[F_X(v)-F_X(u)]^{j-1-i}[1-F_X(v)]^{n-j}\]
-for $-\infty<u,v<\infty$\\
+for $-\infty<u,v<\infty$
+\subsection{Example with U(0,1)}
+\begin{multline*}
+F_Y(x)=x \quad U(0,1)\\
+f_{Y_{(r)},Y_{(s)}}(u,v)=\dfrac{n!}{(r-1)!(s-r-1)!(n-s)!}u^{r-1}(v-u)^{s-r-1}(1-v)^{n-s}\\
+\text{for } u<v\\
+\end{multline*}
+\section{Joint Distribution of all Order Statistics}
 The joint pdf of all the order statistics is:
 \[f_{X_{(1)}\dots,X_{(n)}}(x_1,\dots,x_n)=\begin{cases}
 n!f_X(x_1)\cdots f_X(x_n) \quad -\infty<x_1<\cdots<x_n<\infty\\
 0 \quad \text{otherwise}
 \end{cases}
 \]
+\section{Distribution of the Range}
+Set $r=1$ and $s=n$ in theorem 5.4.6\\
+This gives us the joint distribution of the min and max
+\[f_{Y_{(1)},Y_{(n)}}(u,v)=\dfrac{n!}{(n-2)!}[F_Y(v)-F_Y(u)]^{n-2}f_Y(y)f_Y(v)
+\]
+Do a transformation to $R=Y_{(n)}-Y_{(1)}$ and $W=Y_{(1)}$\\
+The Jacobian is 1
+\[f_{W,R}(w,r)=n(n-1)[F_Y(w+r)-F_Y(w)]^{n-2}f_Y(w)f_Y(w+r)
+\]
+The density of R can be found by integrating out W:\\
+$f_R(r)=\int_{-\infty}^{\infty}f_{W,R}(w,r) \ dw$
+\subsection{Range Example}
+\begin{multline*}
+Y\sim U[0,1] \ F_Y(x)=x\\
+f_R(r)=\int_{0}^{1-r}n(n-1)r^{n-2} \ dw\\
+= n(n-1)r^{n-2}(1-r)\\
+\text{R has a Beta distribution}\\
+E(R)=n(n-1)\int_{0}^{1}r*r^{n-2}(1-r) \ dr\\
+=n(n-1)\left[\dfrac{1}{n}-\dfrac{1}{n+1} \right]\\
+=\dfrac{n-1}{n+1}\\
+\end{multline*}
+\end{flushleft}
 \end{document}
