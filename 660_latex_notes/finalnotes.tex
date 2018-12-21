@@ -111,7 +111,50 @@ If $\sigma=1$ location family\\
 Properties: Let $Z\sim f(z)$ and $X=\sigma Z+\mu$ Then\\
 X has pdf $f_{\mu,\sigma}$\\
 $E(X)=\sigma E(Z)+\mu \quad Var(X)=\sigma^2 Var(Z)$
-
+\chapter{Transformations}
+\section{Integration by Substitution of a New Variable}
+\begin{equation*}
+\begin{aligned}[t]
+&\text{General Case} \\
+&\int_{a}^{b}f(x)\ \dx \\
+&\text{Choose a transformation function } y(x)\\
+&\text{Note its inverse } x(y)\\
+&\text{Replace the limits by } y(a) \text{ and } y(b)\\
+&\text{Replace } f(x) \text{ by } f(x(y))\\
+&\text{Replace } dx \text{ by } \dfrac{dx}{dy}dy \text{ (derivative of inverse)}\\
+&\text{Result is } \int_{y(a)}^{y(b)}f(x(y))\dfrac{dx}{dy}dy\\
+\end{aligned}
+\qquad \qquad
+\begin{aligned}[t]
+&\text{Example}\\
+&\int_{0}^{\sqrt{\frac{\pi}{2}}}2x\cos(x^2)\ \dx\\
+& y(x)=x^2\\
+& x(y)=\sqrt{y}\\
+& 0 \text{ and } \dfrac{\pi}{2}\\
+& 2 \sqrt{y} \cos(y)\\
+& \dfrac{1}{2\sqrt{y}} \ dy\\
+&\int_{0}^{\frac{\pi}{2}} \cos(y) \ dy=1\\
+\end{aligned}
+\end{equation*}
+\section{Application to Probability Density Functions}
+$\int_{a}^{b}f(x) \ \dx=\int_{y(a)}^{y(b)}f(x(y))\dfrac{dx}{dy}dy$\medbreak
+$P(a\leq X<b)=\int_{a}^{b}f(x)\ dx$\\
+Any function of an r.v. is an r.v. itself and if y is taken as some transformation function, $y(X)$ will be a derived r.v.\\
+Let $Y=y(X)$\\
+Notice that if $X=a$ the derived r.v. $Y=y(a)$ and if $X=b$, $Y=y(b)$\\
+If $a\leq X <b$ then $y(a)\leq Y<y(b)$ and:\\
+$P(y(a)\leq Y<y(b))=P(a\leq X<b)$ Therefore:
+\[P(y(a)\leq Y<y(b))=P(a\leq X<b)=\int_{a}^{b}f(x) \ \dx=\int_{y(a)}^{y(b)}f(x(y))\dfrac{dx}{dy}dy
+\]
+Let $g(y)=f(x(y))\dfrac{dx}{dy}$ Then:\\
+$P(y(a)\leq Y<y(b))=\int_{y(a)}^{y(b)}g(y) \ dy$\\
+Thus $g(y)$ is the pdf associated with Y
+\section{Constraints}
+The function $f(x)$ is transformed by $y(x)$ into $g(y)$\\
+Throughout the useful range of x, both $y(x)$ and it's inverse $x(y)$ must be defined and single valued\\
+Throughout this range, $\dfrac{dx}{dy}$ must be defined and must not change signs.\\
+The transformation function $y(x)$ must be monotonic\\
+$g(y)=f(x(y))\bigg|\dfrac{dx}{dy}\bigg |$\\
 \chapter{Notes 13}
 \section{Multinomial Distribution}
 $p(s_1,s_2,\dots,s_k)=\dfrac{n!}{s_1!s_2!\dots s_k!}p_1^{s_1}p_2^{s_2}\cdots p_k^{s_k}$\\
