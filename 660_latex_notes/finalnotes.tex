@@ -121,7 +121,7 @@ $E(X)=\sigma E(Z)+\mu \quad Var(X)=\sigma^2 Var(Z)$
 &\text{Note its inverse } x(y)\\
 &\text{Replace the limits by } y(a) \text{ and } y(b)\\
 &\text{Replace } f(x) \text{ by } f(x(y))\\
-&\text{Replace } dx \text{ by } \dfrac{dx}{dy}dy \text{ (derivative of inverse)}\\
+&\text{Replace } dx \text{ by } \dfrac{dx}{dy}dy \text{ (derivative of inverse) } x(y)\\
 &\text{Result is } \int_{y(a)}^{y(b)}f(x(y))\dfrac{dx}{dy}dy\\
 \end{aligned}
 \qquad \qquad
@@ -154,7 +154,72 @@ The function $f(x)$ is transformed by $y(x)$ into $g(y)$\\
 Throughout the useful range of x, both $y(x)$ and it's inverse $x(y)$ must be defined and single valued\\
 Throughout this range, $\dfrac{dx}{dy}$ must be defined and must not change signs.\\
 The transformation function $y(x)$ must be monotonic\\
+\section{Transformation Formula}
 $g(y)=f(x(y))\bigg|\dfrac{dx}{dy}\bigg |$\\
+Can also be written:\\
+$f_Y(y)=f_X(g^{-1}(y))\bigg|\dfrac{dx}{dy}\bigg |$\\
+$f_Y(y)$ is the transformed density function\\
+$f_X$ is the original function\\
+$g^{-1}(y)$ is the inverse of the transformation function\\
+$\dfrac{dx}{dy}$ is the derivative of the inverse of the transformation function
+\subsection{Example}
+$f(x)$ is $U(0,1)$ \quad $g(y)$ simplifies to:\\
+$g(y)=\bigg|\dfrac{dx}{dy}\bigg |$\\
+transformation function $y(x)=-\dfrac{1}{\lambda}\log(x) \quad \lambda>0$\\
+$y(0)=-\infty \quad y(1)=0 \quad -\infty < y\leq 0 $\\
+$x(y)=e^{-\lambda y}$\medbreak
+$g(y)=\bigg|\dfrac{dx}{dy}\bigg|=\bigg|-\lambda e^{-\lambda y}\bigg|=\lambda e^{-\lambda y} \quad -\infty < y\leq 0 $\\
+$g(y)\sim exp(\lambda)$\\
+\section{Linear Transformation}
+Given X with pdf $f(x)$\\
+$Y=a+bX \quad \dfrac{dy}{dx}=b$\\
+Then $f_Y(y)=f_X\left(\dfrac{y-a}{b}\right)\dfrac{1}{|b|}$\\
+This transformation is used when X has a mean 0 and sd 1.\\
+The transformation creates an rv Y with a distribution that has the same shape as X but has mean a and sd b.\\
+Also If Y has mean a and sd b then $X=(Y-a)/b$ has mean 0 and sd 1
+\subsection{Example}
+Let $X \sim N(0,1)$
+$f_X(x)=\dfrac{1}{\sqrt{2\pi}}e^{-x^2/2} \quad -\infty <x<\infty$\\
+$Y=\mu+\sigma X \quad X=\dfrac{Y-\mu}{\sigma}$\\
+Giving us:
+\[f_Y(y)=f_X \left(\dfrac{y-\mu}{\sigma}\right)\dfrac{1}{\sigma}=\dfrac{1}{\sqrt{2\pi}\sigma}\exp\left[\dfrac{(y-\mu)^2}{2\sigma^2}\right]
+\]
+This is a \textbf{location-scale distribution} since it has the same distribution but with different parameters
+\section{Non-monotone transformations}
+If transformation is not 1-1 start with the CDF of the transformed r.v.\\
+\subsection{Examples}
+$Y=|X|$\\
+$Y=X^2$
+\subsection{Formula}
+Suppose $Y=g(X)$ is not 1-1 but there are disjoint sets $A_1,\dots, A_k$ that span the domain of X such that $g(\cdot)=g_j(\cdot)$ is continuous and 1-1 on each $A_j$. This means that the inverse $x=g_j^{-1}(y)$ exists on each $A_j$ Then:
+\[f_Y(y)=\sum_{j=1}^{k}f(g^{-1}(y))\left|\dfrac{{dg}_j^{-1}(y)}{dy}\right|
+\]
+\section{Kernel Integral Transform}
+$(Tf)(u)=\int_{t_i}^{t_2}f(t)K(t,u) \ du$\\
+T is the transform\\
+f is the input function\\
+Tf is the output function\\
+K is the kernel function, integral kernel or nucleus of the transform
+\subsection{Inverse Kernel}
+$f(t)=\int_{u_1}^{u_2}(Tf)(u)K^{-1}(u,t) \ du$\\
+$K^{-1}(u,t)$ is the inverse kernel
+\chapter{Probability Integral Transform}
+Let $X\sim F_X(x)$\\
+Define the transformation:\\
+$Y=F_X(X) \in [0,1] \quad X=F_X^{-1}(Y)$\\
+$\dfrac{dy}{dx}=F^{'}_X(x)=f_X(x)$\\
+$f_Y(y)=f_X[F_X^{-1}(y)]\dfrac{1}{f_X[F_X^{-1}(y)]}=1$\\
+Meaning Y is $U(0,1)$
+\section{Inverse Probability Integral Transform}
+Used in simulation of r.v.s\\
+Let $X\sim U(0,1)$\\
+Let $Y=F^{-1}(X) \quad X=F(Y)$\\
+where $F(\cdot)$ is a non-decreasing absolutely continuous function\\
+$F(y)=\int_{-\infty}^{y}f(x) \ \dx$\\
+$\dfrac{dx}{dy}=F^{'}(y)=f(y)\Rightarrow f_Y(y)=f(y)$\\
+Another way to see it is:\\
+$F_Y(y)=P(Y\leq y)=P(F^{-1}(X)\leq y)$\\
+$=P(X\leq F(y))=F(y)$\\
 \chapter{Notes 13}
 \section{Multinomial Distribution}
 $p(s_1,s_2,\dots,s_k)=\dfrac{n!}{s_1!s_2!\dots s_k!}p_1^{s_1}p_2^{s_2}\cdots p_k^{s_k}$\\
@@ -163,7 +228,6 @@ where $\sum_{i=1}^{k}s_1=n$ and $\sum_{i=1}^{k}p_i=1$
 A family of pdfs or pmfs is called an exponential family if it can be expressed as
 \[f(x|\theta)=h(x)c(\theta)\exp\left(\sum_{i=1}^{k}w_i(\theta)t_i(x)\right)
 \]
-
 \section{Conditional Probability}
 Discrete:\\
 \begin{align*}
